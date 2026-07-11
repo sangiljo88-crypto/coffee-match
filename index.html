@@ -411,9 +411,42 @@ footer a:hover{color:var(--stamp)}
   position:fixed;left:50%;bottom:34px;transform:translate(-50%,20px);
   background:var(--ink);color:var(--paper);font-size:13.5px;font-weight:600;
   padding:12px 22px;border-radius:10px;opacity:0;pointer-events:none;
-  transition:opacity .25s,transform .25s;z-index:50;box-shadow:0 8px 24px rgba(38,25,14,.3);
+  transition:opacity .25s,transform .25s;z-index:70;box-shadow:0 8px 24px rgba(38,25,14,.3);
 }
 .toast.show{opacity:1;transform:translate(-50%,0)}
+
+/* 공유 방법 선택 시트 */
+.sheet-wrap{position:fixed;inset:0;z-index:60}
+.sheet-backdrop{position:absolute;inset:0;background:rgba(38,25,14,.45)}
+.sheet{
+  position:absolute;left:50%;bottom:0;transform:translateX(-50%);
+  width:100%;max-width:430px;
+  background:var(--card);border:1.6px solid var(--line);border-bottom:none;
+  border-radius:20px 20px 0 0;padding:20px 20px calc(18px + env(safe-area-inset-bottom));
+  box-shadow:0 -10px 30px rgba(38,25,14,.25);
+  animation:sheet-up .28s cubic-bezier(.2,.8,.3,1) both;
+}
+@keyframes sheet-up{from{transform:translate(-50%,40px);opacity:0}to{transform:translate(-50%,0);opacity:1}}
+.sheet-title{
+  font-family:var(--font-mono);font-size:11px;font-weight:600;letter-spacing:.2em;
+  color:var(--ink-faint);text-transform:uppercase;text-align:center;margin-bottom:14px;
+}
+.sheet-btn{
+  display:block;width:100%;margin-bottom:10px;
+  font-family:inherit;font-size:15.5px;font-weight:700;color:var(--ink);
+  background:var(--paper);border:1.6px solid var(--ink);border-radius:12px;
+  padding:15px 12px;cursor:pointer;box-shadow:var(--hard-shadow);
+  transition:transform .15s,box-shadow .15s;
+}
+.sheet-btn:hover{transform:translate(-1px,-1px);box-shadow:4px 4px 0 rgba(38,25,14,.18)}
+.sheet-btn:active{transform:translate(1px,1px);box-shadow:1px 1px 0 rgba(38,25,14,.18)}
+.sheet-btn:focus-visible{outline:3px solid var(--stamp);outline-offset:2px}
+.sheet-cancel{
+  display:block;width:100%;
+  font-family:var(--font-mono);font-size:12.5px;font-weight:500;letter-spacing:.08em;
+  background:none;border:none;color:var(--ink-faint);cursor:pointer;padding:10px;
+}
+.sheet-cancel:hover{color:var(--ink)}
 
 @media (max-width:620px){
   .options-vs{grid-template-columns:1fr;gap:26px}
@@ -535,6 +568,17 @@ footer a:hover{color:var(--stamp)}
   </footer>
 </div>
 <div class="toast" id="toast" role="status"></div>
+
+<!-- 공유 방법 선택 시트 -->
+<div class="sheet-wrap" id="share-sheet" hidden>
+  <div class="sheet-backdrop" id="share-backdrop"></div>
+  <div class="sheet" role="dialog" aria-label="결과 공유하기">
+    <p class="sheet-title">결과 공유하기</p>
+    <button class="sheet-btn" id="share-native" type="button">📲 카톡·문자로 전달하기</button>
+    <button class="sheet-btn" id="share-copy" type="button">🔗 링크 복사하기</button>
+    <button class="sheet-cancel" id="share-close" type="button">닫기</button>
+  </div>
+</div>
 
 <script>
 /* ═══════════════════════════════════════════════════════════════
@@ -1024,19 +1068,33 @@ function animatePct(target) {
   requestAnimationFrame(tick);
 }
 
-/* ── 공유 ── */
+/* ── 공유: 버튼을 누르면 전달하기/링크 복사 선택 시트가 열린다 ── */
 let currentResultKey = null;
 let currentResultPct = null;
-function shareResult() {
-  if (!currentResultKey) return;
-  const url = `${location.origin}${location.pathname}?result=${currentResultKey}`;
+function shareData() {
   const c = COFFEES[currentResultKey];
-  const text = `☕ 나의 인생 커피는 「${c.name}」 (매치율 ${currentResultPct || "93"}%) — ${c.nickname}! 너도 찾아봐`;
-  if (navigator.share) {
-    navigator.share({ title: "커피 취향 월드컵", text, url }).catch(() => {});
-  } else {
-    copyText(`${text}\n${url}`);
-  }
+  return {
+    url: `${location.origin}${location.pathname}?result=${currentResultKey}`,
+    text: `☕ 나의 인생 커피는 「${c.name}」 (매치율 ${currentResultPct || "93"}%) — ${c.nickname}! 너도 찾아봐`,
+  };
+}
+function openShareSheet() {
+  if (!currentResultKey) return;
+  $("share-native").style.display = navigator.share ? "" : "none";
+  $("share-sheet").hidden = false;
+}
+function closeShareSheet() {
+  $("share-sheet").hidden = true;
+}
+function shareNative() {
+  const { url, text } = shareData();
+  closeShareSheet();
+  navigator.share({ title: "커피 취향 월드컵", text, url }).catch(() => {});
+}
+function shareCopy() {
+  const { url, text } = shareData();
+  closeShareSheet();
+  copyText(`${text}\n${url}`);
 }
 function copyText(t) {
   const done = () => toast("링크가 복사되었어요! 친구에게 공유해보세요 ☕");
@@ -1071,7 +1129,12 @@ function startQuiz() {
 $("btn-start").addEventListener("click", startQuiz);
 $("btn-retry").addEventListener("click", startQuiz);
 $("btn-back").addEventListener("click", goBack);
-$("btn-share").addEventListener("click", shareResult);
+$("btn-share").addEventListener("click", openShareSheet);
+$("share-native").addEventListener("click", shareNative);
+$("share-copy").addEventListener("click", shareCopy);
+$("share-close").addEventListener("click", closeShareSheet);
+$("share-backdrop").addEventListener("click", closeShareSheet);
+document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeShareSheet(); });
 
 initIntro();
 
