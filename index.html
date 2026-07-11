@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>커피 취향 월드컵 | 내 인생 커피 찾기</title>
-<meta name="description" content="MBTI·시간대·입맛으로 찾는 나만의 커피. 12번의 선택으로 올데이 컬렉션·스페셜티 11종 중 딱 맞는 커피를 추천받고 바로 구매까지!">
+<title>커피 취향 월드컵 | 아무 커피나 마시지 마세요</title>
+<meta name="description" content="아무 커피나 마시지 마세요. MBTI·시간대·입맛 12번의 선택, 278,528가지 조합에서 당신의 인생 커피를 찾아드립니다.">
 <meta property="og:type" content="website">
-<meta property="og:title" content="커피 취향 월드컵 — 내 인생 커피 찾기">
-<meta property="og:description" content="MBTI부터 커피 마시는 시간대까지, 12번의 선택이면 충분해요 ☕ 올데이 컬렉션·대표 스페셜티 중 딱 맞는 커피를 찾아드립니다">
+<meta property="og:title" content="아무 커피나 마시지 마세요 — 커피 취향 월드컵">
+<meta property="og:description" content="12번의 선택, 278,528가지 조합 ☕ 올데이 컬렉션·대표 스페셜티 11종 중 당신의 인생 커피를 찾아드립니다">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>☕</text></svg>">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <!-- 폰트는 논블로킹으로: CDN이 느리거나 막혀도 페이지는 시스템 폰트로 즉시 동작 -->
@@ -104,7 +104,21 @@ body{
 .btn-start:active{transform:translate(1px,1px);box-shadow:2px 2px 0 rgba(38,25,14,.22)}
 .btn-start .arr{font-family:var(--font-mono);font-size:18px;color:var(--caramel)}
 
-.lineup{margin-top:46px;border-top:1.5px dashed var(--line);padding-top:18px}
+.promise{
+  margin-top:34px;background:var(--card);border:1.6px solid var(--line);
+  border-radius:14px;padding:16px 20px;box-shadow:var(--hard-shadow);
+  align-self:flex-start;
+}
+.promise-label{
+  font-family:var(--font-mono);font-size:10.5px;font-weight:600;
+  letter-spacing:.2em;color:var(--stamp);text-transform:uppercase;margin-bottom:8px;
+}
+.promise ul{list-style:none}
+.promise li{
+  font-size:14px;font-weight:600;color:var(--ink-soft);line-height:1.9;
+}
+.promise li::before{content:"✕ ";color:var(--stamp);font-weight:700}
+.lineup{margin-top:40px;border-top:1.5px dashed var(--line);padding-top:18px}
 .lineup-label{font-family:var(--font-mono);font-size:11px;letter-spacing:.2em;color:var(--ink-faint);text-transform:uppercase;margin-bottom:14px}
 .lineup-tags{display:flex;flex-wrap:wrap;gap:10px 8px}
 .lineup-tags span{
@@ -298,7 +312,7 @@ body{
 }
 .r-notes span:first-child{color:var(--stamp);border-color:var(--stamp);background:rgba(184,67,47,.07)}
 .r-desc{font-size:15px;color:var(--ink-soft);max-width:30em;margin:0 auto;text-wrap:pretty}
-/* 형태 제안 스트립 */
+/* 형태 제안: 단일 스트립(납품용) 또는 3안 카드 */
 .r-form{
   margin:24px 24px 0;padding:16px 18px;
   border:1.6px dashed var(--caramel);border-radius:14px;
@@ -310,6 +324,30 @@ body{
 .r-form-label{font-family:var(--font-mono);font-size:10px;font-weight:600;letter-spacing:.2em;color:var(--caramel);text-transform:uppercase;margin-bottom:4px}
 .r-form-name{font-family:var(--font-display);font-weight:var(--fdw);font-size:19px;line-height:1.3}
 .r-form-tip{font-size:12.5px;color:var(--ink-soft);line-height:1.5}
+.r-tiers{margin:24px 24px 0;text-align:center}
+.r-tiers-label{font-family:var(--font-mono);font-size:10px;font-weight:600;letter-spacing:.2em;color:var(--caramel);text-transform:uppercase;margin-bottom:10px}
+.tier-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;align-items:stretch}
+.tier{
+  background:var(--paper);border:1.5px dashed var(--line);border-radius:12px;
+  padding:12px 6px 13px;display:flex;flex-direction:column;align-items:center;gap:4px;
+}
+.tier-tag{font-family:var(--font-mono);font-size:9.5px;font-weight:600;letter-spacing:.14em;color:var(--ink-faint);text-transform:uppercase}
+.tier-emoji{font-size:26px;line-height:1.2}
+.tier-name{font-size:12.5px;font-weight:700;line-height:1.35}
+.tier.mid{
+  background:var(--card);border:2px solid var(--stamp);border-style:solid;
+  box-shadow:var(--hard-shadow);transform:scale(1.04);
+}
+.tier.mid .tier-tag{color:var(--stamp)}
+.tier-hint{font-size:11.5px;color:var(--ink-faint);margin-top:8px}
+.buy-slogan{
+  font-family:var(--font-display);font-weight:var(--fdw);font-size:18px;
+  text-align:center;color:var(--ink-soft);margin-bottom:12px;
+}
+.mantra{
+  margin-top:26px;text-align:center;font-size:13.5px;font-weight:600;
+  color:var(--bean);line-height:1.7;
+}
 .r-picks{border-top:1.5px dashed var(--line);padding:20px 24px 24px;margin-top:24px}
 .r-picks-label{font-family:var(--font-mono);font-size:11px;font-weight:600;letter-spacing:.2em;color:var(--ink-faint);text-transform:uppercase;text-align:center;margin-bottom:14px}
 .r-picks-chips{display:flex;flex-wrap:wrap;justify-content:center;gap:9px}
@@ -407,15 +445,23 @@ footer a:hover{color:var(--stamp)}
   <!-- 인트로 -->
   <section class="screen intro on" id="screen-intro">
     <p class="eyebrow">Coffee Taste Worldcup</p>
-    <h1>취향으로 찾는<br>나의 <em>인생 커피</em></h1>
-    <p class="lede">MBTI·커피 마시는 시간대·입맛까지 —<br><strong>12번의 선택</strong>이면 충분해요. 이상형 월드컵처럼 고르다 보면, 올데이 컬렉션·대표 스페셜티 11종 중 딱 맞는 커피가 나타납니다.</p>
+    <h1>아무 커피나<br><em>마시지 마세요</em></h1>
+    <p class="lede">맛없는 커피는 없습니다. <strong>당신과 안 맞는 커피</strong>가 있을 뿐이죠. MBTI·시간대·입맛 — 12번의 선택이면, 278,528가지 조합에서 당신의 인생 커피가 나옵니다.</p>
     <div class="meta-row">
       <span><b>12</b>번 선택</span>
       <span><b>11</b>종 커피</span>
-      <span><b>7</b>가지 형태</span>
+      <span><b>278,528</b>조합</span>
       <span><b>1</b>분 소요</span>
     </div>
     <button class="btn-start" id="btn-start" type="button">테스트 시작하기 <span class="arr">→→</span></button>
+    <div class="promise">
+      <p class="promise-label">우리의 약속</p>
+      <ul>
+        <li>아무에게나 같은 커피를 권하지 않습니다</li>
+        <li>유행이라는 이유로 추천하지 않습니다</li>
+        <li>취향을 묻지 않고 팔지 않습니다</li>
+      </ul>
+    </div>
     <div class="lineup">
       <p class="lineup-label">Today's Lineup — All-Day Collection · Specialty</p>
       <div class="lineup-tags" id="lineup-tags"></div>
@@ -461,19 +507,13 @@ footer a:hover{color:var(--stamp)}
         <div class="r-notes" id="r-notes"></div>
         <p class="r-desc" id="r-desc"></p>
       </div>
-      <div class="r-form" id="r-form">
-        <span class="r-form-emoji" id="r-form-emoji">☕</span>
-        <span class="r-form-body">
-          <span class="r-form-label" style="display:block">이렇게 즐겨보세요</span>
-          <span class="r-form-name" id="r-form-name" style="display:block"></span>
-          <span class="r-form-tip" id="r-form-tip" style="display:block"></span>
-        </span>
-      </div>
+      <div id="r-enjoy"></div>
       <div class="r-picks" id="r-picks">
         <p class="r-picks-label">당신의 선택</p>
         <div class="r-picks-chips" id="r-picks-chips"></div>
       </div>
       <div class="buy-zone">
+        <p class="buy-slogan">내일 아침, 첫 모금이 달라집니다</p>
         <a class="btn-buy" id="btn-buy" href="#" target="_blank" rel="noopener">이 커피 구매하러 가기 →</a>
         <p class="buy-note">클릭하면 상품 페이지로 이동해요 · 바로 주문 가능</p>
       </div>
@@ -486,6 +526,7 @@ footer a:hover{color:var(--stamp)}
       <button class="btn-ghost" id="btn-retry" type="button">↺ 다시 하기</button>
       <button class="btn-ghost" id="btn-share" type="button">결과 공유하기</button>
     </div>
+    <p class="mantra" id="mantra">☕ 오늘 인생 커피를 찾아낸 당신에게,<br>48시간 안에 좋은 일이 생깁니다.</p>
   </section>
 
   <footer>
@@ -618,13 +659,23 @@ const COFFEES = {
    url을 채우면 결과 화면에서 형태 제안도 링크로 연결됩니다 (빈칸이면 안내만)
    ═══════════════════════════════════════════════════════════════ */
 const FORMS = {
-  beans200:   { name: "원두커피 200g", emoji: "🫘", tip: "그라인더가 있다면 갓 갈아 내려보세요 — 가장 신선할 때 다 마시는 홈카페 입문 용량.", url: "" },
-  beans500:   { name: "원두커피 500g", emoji: "☕", tip: "매일 마시는 홈카페라면 신선함과 가성비의 균형이 딱 좋은 500g.", url: "" },
-  beans1kg:   { name: "원두커피 1kg+", emoji: "📦", tip: "여럿이, 매장에서, 넉넉하게 — g당 가격이 가장 합리적인 대용량.", url: "" },
-  dripbag12:  { name: "드립백커피 12g", emoji: "🎒", tip: "기구 없이 컵에 걸고 물만 부으면 완성 — 사무실·여행 어디서든.", url: "" },
-  dripbag20:  { name: "드립백커피 20g 대용량", emoji: "🔥", tip: "전문점 핸드드립과 같은 20g 원두량 — 드립백인데도 진하게.", url: "" },
-  essence500: { name: "드립에센스 500ml", emoji: "⏱️", tip: "물·우유에 부으면 10초 완성. 더치와 달리 따뜻하게도 맛있고 라떼도 OK.", url: "" },
-  essence1L:  { name: "드립에센스 1L+", emoji: "🏪", tip: "에스프레소 머신·그라인더 없이 커피 메뉴 판매 — 카페·매장 납품용.", url: "" },
+  beans200:   { name: "원두커피 200g", short: "원두 200g", emoji: "🫘", tip: "그라인더가 있다면 갓 갈아 내려보세요 — 가장 신선할 때 다 마시는 홈카페 입문 용량.", url: "" },
+  beans500:   { name: "원두커피 500g", short: "원두 500g", emoji: "☕", tip: "매일 마시는 홈카페라면 신선함과 가성비의 균형이 딱 좋은 500g.", url: "" },
+  beans1kg:   { name: "원두커피 1kg+", short: "원두 1kg+", emoji: "📦", tip: "여럿이, 매장에서, 넉넉하게 — g당 가격이 가장 합리적인 대용량.", url: "" },
+  dripbag12:  { name: "드립백커피 12g", short: "드립백 12g", emoji: "🎒", tip: "기구 없이 컵에 걸고 물만 부으면 완성 — 사무실·여행 어디서든.", url: "" },
+  dripbag20:  { name: "드립백커피 20g 대용량", short: "드립백 20g", emoji: "🔥", tip: "전문점 핸드드립과 같은 20g 원두량 — 드립백인데도 진하게.", url: "" },
+  essence500: { name: "드립에센스 500ml", short: "에센스 500ml", emoji: "⏱️", tip: "물·우유에 부으면 10초 완성. 더치와 달리 따뜻하게도 맛있고 라떼도 OK.", url: "" },
+  essence1L:  { name: "드립에센스 1L+", short: "에센스 1L+", emoji: "🏪", tip: "에스프레소 머신·그라인더 없이 커피 메뉴 판매 — 카페·매장 납품용.", url: "" },
+};
+
+/* 형태 3안 제시(옵션 3개 법칙): 가운데가 계산된 추천.
+   납품용 결과(essence1L·beans1kg)는 옵션이 아니므로 단일 스트립으로 표시 */
+const FORM_TIERS = {
+  beans200:   ["dripbag12", "beans200", "beans500"],
+  beans500:   ["beans200", "beans500", "beans1kg"],
+  dripbag12:  ["essence500", "dripbag12", "dripbag20"],
+  dripbag20:  ["dripbag12", "dripbag20", "beans1kg"],
+  essence500: ["dripbag12", "essence500", "essence1L"],
 };
 
 /* ═══════════════════════════════════════════════════════════════
@@ -847,7 +898,7 @@ function goBack() {
 }
 
 /* ── 분석 연출 ── */
-const LOADING_LINES = ["취향 데이터 분석 중...", "올데이 컬렉션 대조 중...", "스페셜티 라인업 확인 중...", "당신의 커피를 찾았어요!"];
+const LOADING_LINES = ["취향 데이터 분석 중...", "278,528가지 조합 대조 중...", "올데이 컬렉션·스페셜티 확인 중...", "당신의 커피를 찾았어요!"];
 function startLoading() {
   showScreen("loading");
   let step = 0;
@@ -871,7 +922,9 @@ function computeResult() {
   const ranked = Object.keys(COFFEES).sort((a, b) => coffeeScores[b] - coffeeScores[a]);
   const [top, second, third] = ranked;
   const formTop = Object.keys(FORMS).sort((a, b) => formScores[b] - formScores[a])[0];
-  const pct = Math.min(98, Math.max(87, 87 + Math.round((coffeeScores[top] - coffeeScores[second]) * 2.5)));
+  /* 매치율: 0으로 끝나는 숫자는 성의 없는 숫자 — 점수 기반 소수점 한 자리 */
+  const pctBase = Math.min(98, Math.max(87, 87 + Math.round((coffeeScores[top] - coffeeScores[second]) * 2.5)));
+  const pct = `${pctBase}.${(coffeeScores[top] * 7 + coffeeScores[second] * 3) % 10}`;
   const reasons = [];
   answers
     .filter(({ option }) => (option.coffee || {})[top])
@@ -894,16 +947,38 @@ function showResult({ key, subs, formKey, pct, reasons, shared }) {
   $("r-desc").textContent = c.desc;
   $("btn-buy").href = c.url;
 
-  const formBox = $("r-form");
+  const enjoyBox = $("r-enjoy");
   if (formKey && FORMS[formKey]) {
-    const f = FORMS[formKey];
-    formBox.style.display = "";
-    $("r-form-emoji").textContent = f.emoji;
-    $("r-form-name").textContent = f.name;
-    $("r-form-tip").textContent = f.tip;
+    const tiers = FORM_TIERS[formKey];
+    if (tiers) {
+      enjoyBox.innerHTML = `<div class="r-tiers">
+        <p class="r-tiers-label">어떻게 시작할까요?</p>
+        <div class="tier-grid">${tiers.map((k, i) => {
+          const f = FORMS[k];
+          const tag = i === 0 ? "가볍게" : i === 1 ? "★ 딱 맞아요" : "넉넉하게";
+          return `<div class="tier${i === 1 ? " mid" : ""}">
+            <span class="tier-tag">${tag}</span>
+            <span class="tier-emoji">${f.emoji}</span>
+            <span class="tier-name">${f.short}</span>
+          </div>`;
+        }).join("")}</div>
+        <p class="tier-hint">${FORMS[formKey].tip}</p>
+      </div>`;
+    } else {
+      const f = FORMS[formKey];
+      enjoyBox.innerHTML = `<div class="r-form">
+        <span class="r-form-emoji">${f.emoji}</span>
+        <span class="r-form-body">
+          <span class="r-form-label" style="display:block">이렇게 즐겨보세요</span>
+          <span class="r-form-name" style="display:block">${f.name}</span>
+          <span class="r-form-tip" style="display:block">${f.tip}</span>
+        </span>
+      </div>`;
+    }
   } else {
-    formBox.style.display = "none";
+    enjoyBox.innerHTML = "";
   }
+  $("mantra").style.display = shared ? "none" : "";
 
   const picksBox = $("r-picks");
   if (shared || !reasons.length) {
@@ -927,6 +1002,7 @@ function showResult({ key, subs, formKey, pct, reasons, shared }) {
   showScreen("result");
   animatePct(pct);
   currentResultKey = key;
+  currentResultPct = String(pct);
 }
 
 function hashCode(str) {
@@ -937,10 +1013,12 @@ function hashCode(str) {
 
 function animatePct(target) {
   const el = $("r-pct");
+  const final = String(target);
+  const base = parseFloat(final);
   const dur = 900, t0 = performance.now();
   function tick(t) {
     const p = Math.min(1, (t - t0) / dur);
-    el.textContent = Math.round(target * (1 - Math.pow(1 - p, 3)));
+    el.textContent = p < 1 ? String(Math.round(base * (1 - Math.pow(1 - p, 3)))) : final;
     if (p < 1) requestAnimationFrame(tick);
   }
   requestAnimationFrame(tick);
@@ -948,11 +1026,12 @@ function animatePct(target) {
 
 /* ── 공유 ── */
 let currentResultKey = null;
+let currentResultPct = null;
 function shareResult() {
   if (!currentResultKey) return;
   const url = `${location.origin}${location.pathname}?result=${currentResultKey}`;
   const c = COFFEES[currentResultKey];
-  const text = `☕ 나의 인생 커피는 「${c.name}」 — ${c.nickname}! 너도 찾아봐`;
+  const text = `☕ 나의 인생 커피는 「${c.name}」 (매치율 ${currentResultPct || "93"}%) — ${c.nickname}! 너도 찾아봐`;
   if (navigator.share) {
     navigator.share({ title: "커피 취향 월드컵", text, url }).catch(() => {});
   } else {
@@ -1003,11 +1082,12 @@ initIntro();
    CDN 실패 시에는 df 클래스가 안 붙어 굵은 본문체 폴백이 유지된다. */
 if (document.fonts && document.fonts.load) {
   const displayText = [
-    "취향으로 찾는 나의 인생 커피", "테스트 시작하기", "PICK!",
-    "당신의 커피를 내리는 중", "이 커피 구매하러 가기", "다시 하기", "나도 테스트 하기", "이렇게 즐겨보세요",
+    "아무 커피나 마시지 마세요", "테스트 시작하기", "PICK!",
+    "당신의 커피를 내리는 중", "이 커피 구매하러 가기", "다시 하기", "나도 테스트 하기",
+    "이렇게 즐겨보세요", "내일 아침, 첫 모금이 달라집니다",
     ...QUESTIONS.flatMap((q) => [q.q, ...q.options.map((o) => o.title)]),
     ...Object.values(COFFEES).map((c) => c.name),
-    ...Object.values(FORMS).map((f) => f.name),
+    ...Object.values(FORMS).map((f) => f.name + f.short),
   ].join("");
   const tryDisplayFont = () => {
     if (document.documentElement.classList.contains("df")) return;
@@ -1023,7 +1103,7 @@ if (document.fonts && document.fonts.load) {
 const sharedKey = new URLSearchParams(location.search).get("result");
 if (sharedKey && COFFEES[sharedKey]) {
   const others = Object.keys(COFFEES).filter((k) => k !== sharedKey);
-  showResult({ key: sharedKey, subs: others.slice(0, 2), formKey: null, pct: 93, reasons: [], shared: true });
+  showResult({ key: sharedKey, subs: others.slice(0, 2), formKey: null, pct: `9${hashCode(sharedKey) % 6 + 2}.${hashCode(sharedKey) % 10}`, reasons: [], shared: true });
 }
 </script>
 </body>
