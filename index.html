@@ -8,6 +8,8 @@
 <meta property="og:type" content="website">
 <meta property="og:title" content="아무 커피나 마시지 마세요 — 커피 취향 월드컵">
 <meta property="og:description" content="12번의 선택, 278,528가지 조합 ☕ 올데이 컬렉션·대표 스페셜티 11종 중 당신의 인생 커피를 찾아드립니다">
+<meta property="og:url" content="https://sangiljo88-crypto.github.io/coffee-match/">
+<meta property="og:image" content="https://sangiljo88-crypto.github.io/coffee-match/assets/og/cover.png">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>☕</text></svg>">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <!-- 폰트는 논블로킹으로: CDN이 느리거나 막혀도 페이지는 시스템 폰트로 즉시 동작 -->
@@ -311,7 +313,27 @@ body{
   border:1.5px solid var(--bean);border-radius:999px;padding:4px 13px;background:rgba(119,133,95,.08);
 }
 .r-notes span:first-child{color:var(--stamp);border-color:var(--stamp);background:rgba(184,67,47,.07)}
+.r-rarity{
+  font-family:var(--font-mono);font-size:11px;font-weight:600;letter-spacing:.08em;
+  color:var(--caramel);margin:-10px 0 18px;
+}
 .r-desc{font-size:15px;color:var(--ink-soft);max-width:30em;margin:0 auto;text-wrap:pretty}
+/* 친구와의 커피 궁합 */
+.r-compat{
+  margin:24px 24px 0;padding:18px 18px 20px;text-align:center;
+  border:2px solid var(--bean);border-radius:14px;
+  background:rgba(119,133,95,.07);
+}
+.r-compat-label{
+  font-family:var(--font-mono);font-size:10.5px;font-weight:600;letter-spacing:.2em;
+  color:var(--bean);text-transform:uppercase;margin-bottom:10px;
+}
+.r-compat-pair{font-size:15px;font-weight:700;margin-bottom:6px}
+.r-compat-score{
+  font-family:var(--font-display);font-weight:var(--fdw);font-size:40px;line-height:1.1;
+  color:var(--bean);margin-bottom:8px;
+}
+.r-compat-line{font-size:13.5px;color:var(--ink-soft);line-height:1.6;text-wrap:pretty}
 /* 형태 제안: 단일 스트립(납품용) 또는 3안 카드 */
 .r-form{
   margin:24px 24px 0;padding:16px 18px;
@@ -538,12 +560,19 @@ footer a:hover{color:var(--stamp)}
         <h2 class="r-name" id="r-name"></h2>
         <p class="r-en" id="r-en"></p>
         <div class="r-notes" id="r-notes"></div>
+        <p class="r-rarity" id="r-rarity"></p>
         <p class="r-desc" id="r-desc"></p>
       </div>
       <div id="r-enjoy"></div>
       <div class="r-picks" id="r-picks">
         <p class="r-picks-label">당신의 선택</p>
         <div class="r-picks-chips" id="r-picks-chips"></div>
+      </div>
+      <div class="r-compat" id="r-compat" style="display:none">
+        <p class="r-compat-label">☕ 친구와의 커피 궁합</p>
+        <p class="r-compat-pair" id="r-compat-pair"></p>
+        <p class="r-compat-score"><span id="r-compat-score">0</span>점</p>
+        <p class="r-compat-line" id="r-compat-line"></p>
       </div>
       <div class="buy-zone">
         <p class="buy-slogan">내일 아침, 첫 모금이 달라집니다</p>
@@ -576,6 +605,7 @@ footer a:hover{color:var(--stamp)}
     <p class="sheet-title">결과 공유하기</p>
     <button class="sheet-btn" id="share-native" type="button">📲 카톡·문자로 전달하기</button>
     <button class="sheet-btn" id="share-copy" type="button">🔗 링크 복사하기</button>
+    <button class="sheet-btn" id="share-image" type="button">🖼️ 결과 카드 저장하기</button>
     <button class="sheet-cancel" id="share-close" type="button">닫기</button>
   </div>
 </div>
@@ -722,6 +752,41 @@ const FORM_TIERS = {
   essence500: ["dripbag12", "essence500", "essence1L"],
 };
 
+/* 결과 희귀도 — 278,528개 전체 답변 조합을 전수 계산한 실제 도달 비율(%).
+   QUESTIONS 점수를 바꾸면 scripts의 rarity 계산을 다시 돌려 갱신할 것 */
+const RARITY = { morningzest: 13.1, middayharmony: 15.5, afternoonbold: 11.9, twilightamber: 21.3, josangil: 5.3, ethiopia: 6.5, png: 1.1, guatemala: 14.4, kenya: 5.6, colombia: 4.2, brazil: 1.0 };
+
+/* ═══════════════════════════════════════════════════════════════
+   친구와의 커피 궁합 — 맛 계열 조합별 점수·문구
+   ═══════════════════════════════════════════════════════════════ */
+const TASTE_GROUP = { morningzest: "A", ethiopia: "A", middayharmony: "S", png: "S", afternoonbold: "B", guatemala: "B", kenya: "K", colombia: "N", brazil: "N", josangil: "BAL", twilightamber: "D" };
+const COMPAT_PAIRS = {
+  "A|A": [93, "산미 쌍둥이 — 카페 가면 주문이 3초컷. 신맛 예찬으로 밤샐 수 있는 사이예요."],
+  "S|S": [93, "달콤 쌍둥이 — 디저트 취향까지 통할 확률 99%. 카페 투어 최고의 짝이에요."],
+  "B|B": [93, "쓴맛 동지 — 말없이 마셔도 어색하지 않은, 깊이를 아는 사이예요."],
+  "N|N": [93, "고소 단짝 — 자극 없이 편안한 조합. 오래 가는 우정의 맛이에요."],
+  "A|B": [87, "밀당 커플 — 상큼함과 쌉싸름함, 서로에게 없는 걸 채워주는 케미예요."],
+  "A|S": [85, "과일청 케미 — 새콤함에 달콤함이 만나면 에이드 완성. 같이 놀면 재밌는 조합이에요."],
+  "A|N": [83, "아침과 오후 — 리듬은 달라도 커피 사랑의 온도는 같은 사이예요."],
+  "B|S": [86, "단쓴단쓴 — 초콜릿 같은 조합. 싸울 일이 없는 사이예요."],
+  "N|S": [88, "포근 콤비 — 달콤하고 고소해서 같이 있으면 마음이 놓이는 사이예요."],
+  "B|N": [84, "묵직 콤비 — 어른의 커피상에서 만난 진하고 고소한 동맹이에요."],
+};
+function compatOf(myKey, friendKey) {
+  const d = (hashCode(myKey + friendKey) % 9) + 1; // 소수점 한 자리(1~9)
+  if (myKey === friendKey)
+    return { score: `99.${d}`, line: "완벽한 천생연분 — 278,528개 조합에서 같은 커피에 도착했어요. 오늘 꼭 같이 한 잔 해야 하는 사이." };
+  const g1 = TASTE_GROUP[myKey], g2 = TASTE_GROUP[friendKey];
+  if (g1 === "BAL" || g2 === "BAL")
+    return { score: `91.${d}`, line: "다 받아주는 사이 — 조상일 블렌드는 어떤 취향과도 밸런스를 맞춰요. 편안한데 은근히 빠져나올 수 없어요." };
+  if (g1 === "K" || g2 === "K")
+    return { score: `89.${d}`, line: "욕심쟁이와 친구들 — 산미도 쓴맛도 다 가진 케냐 마사이가 그 취향까지 품어주는 조합이에요." };
+  if (g1 === "D" || g2 === "D")
+    return { score: `81.${d}`, line: "낮과 밤 — 활동 시간이 달라도 저녁이면 결국 만나는 사이. 디카페인이라 밤샘 수다도 문제없어요." };
+  const pair = COMPAT_PAIRS[`${g1}|${g2}`] || COMPAT_PAIRS[`${g2}|${g1}`];
+  return { score: `${pair[0]}.${d}`, line: pair[1] };
+}
+
 /* ═══════════════════════════════════════════════════════════════
    MBTI 글자별 가중치 — coffee(커피 점수) / form(형태 점수)
    ═══════════════════════════════════════════════════════════════ */
@@ -850,6 +915,8 @@ const QUESTIONS = [
 const $ = (id) => document.getElementById(id);
 const screens = { intro: $("screen-intro"), quiz: $("screen-quiz"), loading: $("screen-loading"), result: $("screen-result") };
 let answers = []; // { qIndex, option }
+let sharedFromKey = null; // 공유 링크로 들어온 경우 링크 주인의 커피
+let compatFrom = null;    // 이번 테스트가 끝나면 궁합을 보여줄 상대 커피
 
 function showScreen(name) {
   Object.values(screens).forEach((s) => s.classList.remove("on"));
@@ -988,8 +1055,21 @@ function showResult({ key, subs, formKey, pct, reasons, shared }) {
   $("r-name").textContent = c.name;
   $("r-en").textContent = c.en;
   $("r-notes").innerHTML = c.notes.map((n) => `<span>${n}</span>`).join("");
+  $("r-rarity").textContent = RARITY[key] ? `RARITY — 278,528개 조합 중 ${RARITY[key]}%만 도착하는 결과` : "";
   $("r-desc").textContent = c.desc;
   $("btn-buy").href = c.url;
+
+  const compatBox = $("r-compat");
+  if (!shared && compatFrom && COFFEES[compatFrom] && compatFrom !== undefined) {
+    const f = COFFEES[compatFrom];
+    const cp = compatOf(key, compatFrom);
+    compatBox.style.display = "";
+    $("r-compat-pair").textContent = `${f.emoji} 친구의 ${f.name}  ×  ${c.emoji} 나의 ${c.name}`;
+    $("r-compat-score").textContent = cp.score;
+    $("r-compat-line").textContent = cp.line;
+  } else {
+    compatBox.style.display = "none";
+  }
 
   const enjoyBox = $("r-enjoy");
   if (formKey && FORMS[formKey]) {
@@ -1042,7 +1122,7 @@ function showResult({ key, subs, formKey, pct, reasons, shared }) {
     </a>`;
   }).join("");
 
-  $("btn-retry").textContent = shared ? "☕ 나도 테스트 하기" : "↺ 다시 하기";
+  $("btn-retry").textContent = shared ? "☕ 나도 테스트하고 궁합 보기" : "↺ 다시 하기";
   showScreen("result");
   animatePct(pct);
   currentResultKey = key;
@@ -1068,14 +1148,15 @@ function animatePct(target) {
   requestAnimationFrame(tick);
 }
 
-/* ── 공유: 버튼을 누르면 전달하기/링크 복사 선택 시트가 열린다 ── */
+/* ── 공유: 버튼을 누르면 전달하기/링크 복사/카드 저장 선택 시트가 열린다 ── */
 let currentResultKey = null;
 let currentResultPct = null;
 function shareData() {
   const c = COFFEES[currentResultKey];
   return {
-    url: `${location.origin}${location.pathname}?result=${currentResultKey}`,
-    text: `☕ 나의 인생 커피는 「${c.name}」 (매치율 ${currentResultPct || "93"}%) — ${c.nickname}! 너도 찾아봐`,
+    // 결과별 미리보기 페이지(r/키.html)로 공유해야 카톡 썸네일이 내 결과로 뜬다
+    url: new URL(`r/${currentResultKey}.html`, location.href).href,
+    text: `나랑 커피 궁합 볼래? ☕ 나는 「${c.name}」 (매치율 ${currentResultPct || "93"}%) — ${c.nickname}`,
   };
 }
 function openShareSheet() {
@@ -1095,6 +1176,109 @@ function shareCopy() {
   const { url, text } = shareData();
   closeShareSheet();
   copyText(`${text}\n${url}`);
+}
+
+/* ── 결과 카드 이미지(1080×1920, 인스타 스토리용) 생성·저장 ── */
+function displayFont(px) {
+  return document.documentElement.classList.contains("df")
+    ? `400 ${px}px "Do Hyeon", sans-serif`
+    : `800 ${px}px "Pretendard Variable", Pretendard, sans-serif`;
+}
+function roundRect(ctx, x, y, w, h, r) {
+  ctx.beginPath();
+  ctx.moveTo(x + r, y);
+  ctx.arcTo(x + w, y, x + w, y + h, r);
+  ctx.arcTo(x + w, y + h, x, y + h, r);
+  ctx.arcTo(x, y + h, x, y, r);
+  ctx.arcTo(x, y, x + w, y, r);
+  ctx.closePath();
+}
+function buildResultImage() {
+  const c = COFFEES[currentResultKey];
+  const W = 1080, H = 1920;
+  const cv = document.createElement("canvas");
+  cv.width = W; cv.height = H;
+  const x = cv.getContext("2d");
+
+  x.fillStyle = "#EAE0CC"; x.fillRect(0, 0, W, H);
+  x.textAlign = "center";
+
+  // 리포트 카드 패널
+  x.fillStyle = "#F4EDDD";
+  x.strokeStyle = "#C9B896"; x.lineWidth = 4;
+  roundRect(x, 70, 150, W - 140, H - 420, 36); x.fill(); x.stroke();
+
+  x.fillStyle = "#5C4A38";
+  x.font = "600 30px 'IBM Plex Mono', monospace";
+  x.fillText("MATCH REPORT · COFFEE TASTE WORLDCUP", W / 2, 250);
+  x.strokeStyle = "#C9B896"; x.setLineDash([10, 10]);
+  x.beginPath(); x.moveTo(120, 295); x.lineTo(W - 120, 295); x.stroke();
+  x.setLineDash([]);
+
+  x.fillStyle = "#B8432F";
+  x.font = displayFont(120);
+  x.fillText(`${currentResultPct || "93"}%`, W / 2, 440);
+  x.font = "600 34px 'IBM Plex Mono', monospace";
+  x.fillText("MATCH", W / 2, 495);
+
+  x.font = "300px sans-serif";
+  x.fillText(c.emoji, W / 2, 850);
+
+  x.fillStyle = "#77855F";
+  x.font = "700 40px Pretendard, sans-serif";
+  x.fillText(`당신은 「${c.nickname}」`, W / 2, 960);
+
+  x.fillStyle = "#26190E";
+  x.font = displayFont(96);
+  x.fillText(c.name, W / 2, 1080);
+  x.fillStyle = "#8A7660";
+  x.font = "600 30px 'IBM Plex Mono', monospace";
+  x.fillText(c.en.toUpperCase(), W / 2, 1140);
+
+  // 노트 칩
+  x.font = "700 34px Pretendard, sans-serif";
+  const chips = c.notes;
+  const widths = chips.map((n) => x.measureText(n).width + 60);
+  let cx = W / 2 - (widths.reduce((a, b) => a + b, 0) + (chips.length - 1) * 20) / 2;
+  chips.forEach((n, i) => {
+    x.strokeStyle = "#77855F"; x.lineWidth = 3;
+    roundRect(x, cx, 1190, widths[i], 66, 33); x.stroke();
+    x.fillStyle = "#77855F";
+    x.fillText(n, cx + widths[i] / 2, 1236);
+    cx += widths[i] + 20;
+  });
+
+  if (RARITY[currentResultKey]) {
+    x.fillStyle = "#A9713F";
+    x.font = "600 30px 'IBM Plex Mono', monospace";
+    x.fillText(`RARITY — 278,528개 조합 중 ${RARITY[currentResultKey]}%`, W / 2, 1350);
+  }
+
+  x.fillStyle = "#5C4A38";
+  x.font = displayFont(48);
+  x.fillText("내일 아침, 첫 모금이 달라집니다", W / 2, 1500);
+
+  x.fillStyle = "#26190E";
+  x.font = displayFont(44);
+  x.fillText(`☕ 커피 취향 월드컵 · ${CONFIG.shopName}`, W / 2, 1730);
+  x.fillStyle = "#8A7660";
+  x.font = "500 26px 'IBM Plex Mono', monospace";
+  x.fillText("sangiljo88-crypto.github.io/coffee-match", W / 2, 1785);
+
+  return cv.toDataURL("image/png");
+}
+function shareImage() {
+  if (!currentResultKey) return;
+  closeShareSheet();
+  const run = () => {
+    const a = document.createElement("a");
+    a.href = buildResultImage();
+    a.download = `커피취향월드컵_${COFFEES[currentResultKey].name}.png`;
+    document.body.appendChild(a); a.click(); a.remove();
+    toast("결과 카드를 저장했어요! 스토리에 올려보세요 📸");
+  };
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(run);
+  else run();
 }
 function copyText(t) {
   const done = () => toast("링크가 복사되었어요! 친구에게 공유해보세요 ☕");
@@ -1122,6 +1306,7 @@ function toast(msg) {
 function startQuiz() {
   answers = [];
   currentResultKey = null;
+  compatFrom = sharedFromKey; // 친구 링크로 들어왔다면 결과에서 궁합 표시
   renderQuestion();
   showScreen("quiz");
 }
@@ -1132,6 +1317,7 @@ $("btn-back").addEventListener("click", goBack);
 $("btn-share").addEventListener("click", openShareSheet);
 $("share-native").addEventListener("click", shareNative);
 $("share-copy").addEventListener("click", shareCopy);
+$("share-image").addEventListener("click", shareImage);
 $("share-close").addEventListener("click", closeShareSheet);
 $("share-backdrop").addEventListener("click", closeShareSheet);
 document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeShareSheet(); });
@@ -1165,6 +1351,7 @@ if (document.fonts && document.fonts.load) {
 /* 공유 링크(?result=키)로 들어온 경우 결과 바로 보여주기 */
 const sharedKey = new URLSearchParams(location.search).get("result");
 if (sharedKey && COFFEES[sharedKey]) {
+  sharedFromKey = sharedKey;
   const others = Object.keys(COFFEES).filter((k) => k !== sharedKey);
   showResult({ key: sharedKey, subs: others.slice(0, 2), formKey: null, pct: `9${hashCode(sharedKey) % 6 + 2}.${hashCode(sharedKey) % 10}`, reasons: [], shared: true });
 }
