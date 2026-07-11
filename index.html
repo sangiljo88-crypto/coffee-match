@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>커피 취향 월드컵 | 내 인생 커피 찾기</title>
-<meta name="description" content="MBTI·장소·습관·입맛으로 찾는 나만의 커피. 10번의 선택으로 원두·드립백·드립에센스 중 딱 맞는 제품을 추천받고 바로 구매까지!">
+<meta name="description" content="MBTI·시간대·입맛으로 찾는 나만의 커피. 12번의 선택으로 올데이 컬렉션·스페셜티 11종 중 딱 맞는 커피를 추천받고 바로 구매까지!">
 <meta property="og:type" content="website">
 <meta property="og:title" content="커피 취향 월드컵 — 내 인생 커피 찾기">
-<meta property="og:description" content="MBTI부터 커피 습관까지, 10번의 선택이면 충분해요 ☕ 원두·드립백·드립에센스 중 딱 맞는 커피를 찾아드립니다">
+<meta property="og:description" content="MBTI부터 커피 마시는 시간대까지, 12번의 선택이면 충분해요 ☕ 올데이 컬렉션·대표 스페셜티 중 딱 맞는 커피를 찾아드립니다">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>☕</text></svg>">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <!-- 폰트는 논블로킹으로: CDN이 느리거나 막혀도 페이지는 시스템 폰트로 즉시 동작 -->
@@ -128,11 +128,11 @@ body{
 /* 쿠폰 도장 진행판 */
 .punchcard{
   background:var(--card);border:1.5px solid var(--line);border-radius:12px;
-  padding:12px 14px;display:flex;align-items:center;justify-content:space-between;gap:6px;
+  padding:12px 14px;display:flex;align-items:center;justify-content:space-between;gap:5px;
   box-shadow:var(--hard-shadow);margin-bottom:30px;
 }
 .punch{
-  width:22px;height:22px;border-radius:50%;
+  width:20px;height:20px;border-radius:50%;
   border:1.6px dashed var(--ink-faint);position:relative;flex:none;
 }
 .punch.filled{border:none;background:var(--caramel)}
@@ -212,7 +212,7 @@ body{
   box-shadow:0 6px 16px rgba(38,25,14,.2);
   animation:stamp-slam .32s cubic-bezier(.2,1.4,.4,1) both;
 }
-/* 4지선다(나이·장소) 그리드 */
+/* 4지선다(나이·장소·시간대) 그리드 */
 .options-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 .options-grid .opt{--tilt:0deg;padding:18px 14px 20px}
 .options-grid .opt-emoji{width:64px;height:64px;font-size:32px;margin-bottom:12px}
@@ -289,15 +289,28 @@ body{
   letter-spacing:.18em;color:var(--caramel);border:1.5px solid var(--caramel);
   border-radius:999px;padding:3px 13px;margin-bottom:12px;text-transform:uppercase;
 }
-.r-name{font-family:var(--font-display);font-weight:var(--fdw);font-size:clamp(32px,7.2vw,46px);line-height:1.2;text-wrap:balance}
-.r-en{font-family:var(--font-mono);font-size:12px;letter-spacing:.18em;color:var(--ink-faint);text-transform:uppercase;margin:6px 0 20px}
+.r-name{font-family:var(--font-display);font-weight:var(--fdw);font-size:clamp(30px,7vw,44px);line-height:1.22;text-wrap:balance}
+.r-en{font-family:var(--font-mono);font-size:11.5px;letter-spacing:.14em;color:var(--ink-faint);text-transform:uppercase;margin:6px 0 20px}
 .r-notes{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-bottom:22px}
 .r-notes span{
   font-size:12.5px;font-weight:600;color:var(--bean);
   border:1.5px solid var(--bean);border-radius:999px;padding:4px 13px;background:rgba(119,133,95,.08);
 }
+.r-notes span:first-child{color:var(--stamp);border-color:var(--stamp);background:rgba(184,67,47,.07)}
 .r-desc{font-size:15px;color:var(--ink-soft);max-width:30em;margin:0 auto;text-wrap:pretty}
-.r-picks{border-top:1.5px dashed var(--line);padding:20px 24px 24px}
+/* 형태 제안 스트립 */
+.r-form{
+  margin:24px 24px 0;padding:16px 18px;
+  border:1.6px dashed var(--caramel);border-radius:14px;
+  display:flex;align-items:center;gap:14px;text-align:left;
+  background:rgba(169,113,63,.06);
+}
+.r-form-emoji{font-size:34px;line-height:1;flex:none}
+.r-form-body{flex:1}
+.r-form-label{font-family:var(--font-mono);font-size:10px;font-weight:600;letter-spacing:.2em;color:var(--caramel);text-transform:uppercase;margin-bottom:4px}
+.r-form-name{font-family:var(--font-display);font-weight:var(--fdw);font-size:19px;line-height:1.3}
+.r-form-tip{font-size:12.5px;color:var(--ink-soft);line-height:1.5}
+.r-picks{border-top:1.5px dashed var(--line);padding:20px 24px 24px;margin-top:24px}
 .r-picks-label{font-family:var(--font-mono);font-size:11px;font-weight:600;letter-spacing:.2em;color:var(--ink-faint);text-transform:uppercase;text-align:center;margin-bottom:14px}
 .r-picks-chips{display:flex;flex-wrap:wrap;justify-content:center;gap:9px}
 .r-picks-chips span{
@@ -375,8 +388,9 @@ footer a:hover{color:var(--stamp)}
   .options-mbti{gap:8px}
   .mbti-chip{font-size:12.5px;padding:13px 0;letter-spacing:.05em}
   .subrec-list{grid-template-columns:1fr}
-  .meta-row{gap:16px}
-  .punch{width:18px;height:18px}
+  .meta-row{gap:14px}
+  .punch{width:16px;height:16px}
+  .r-form{margin:20px 16px 0;flex-direction:row}
 }
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition:none!important}
@@ -394,16 +408,16 @@ footer a:hover{color:var(--stamp)}
   <section class="screen intro on" id="screen-intro">
     <p class="eyebrow">Coffee Taste Worldcup</p>
     <h1>취향으로 찾는<br>나의 <em>인생 커피</em></h1>
-    <p class="lede">MBTI·나이·장소·커피 습관까지 —<br><strong>10번의 선택</strong>이면 충분해요. 이상형 월드컵처럼 고르다 보면, 원두·드립백·드립에센스 중 딱 맞는 커피가 나타납니다.</p>
+    <p class="lede">MBTI·커피 마시는 시간대·입맛까지 —<br><strong>12번의 선택</strong>이면 충분해요. 이상형 월드컵처럼 고르다 보면, 올데이 컬렉션·대표 스페셜티 11종 중 딱 맞는 커피가 나타납니다.</p>
     <div class="meta-row">
-      <span><b>10</b>번 선택</span>
-      <span><b>3</b>개 라인</span>
-      <span><b>7</b>가지 제품</span>
+      <span><b>12</b>번 선택</span>
+      <span><b>11</b>종 커피</span>
+      <span><b>7</b>가지 형태</span>
       <span><b>1</b>분 소요</span>
     </div>
     <button class="btn-start" id="btn-start" type="button">테스트 시작하기 <span class="arr">→→</span></button>
     <div class="lineup">
-      <p class="lineup-label">Today's Lineup — Beans · Drip Bag · Essence</p>
+      <p class="lineup-label">Today's Lineup — All-Day Collection · Specialty</p>
       <div class="lineup-tags" id="lineup-tags"></div>
     </div>
   </section>
@@ -411,7 +425,7 @@ footer a:hover{color:var(--stamp)}
   <!-- 퀴즈 -->
   <section class="screen quiz" id="screen-quiz" aria-live="polite">
     <div class="quiz-head">
-      <span class="q-counter" id="q-counter">Q 01/10</span>
+      <span class="q-counter" id="q-counter">Q 01/12</span>
       <span class="q-cat" id="q-cat">MBTI</span>
     </div>
     <div class="punchcard" id="punchcard" aria-hidden="true"></div>
@@ -447,6 +461,14 @@ footer a:hover{color:var(--stamp)}
         <div class="r-notes" id="r-notes"></div>
         <p class="r-desc" id="r-desc"></p>
       </div>
+      <div class="r-form" id="r-form">
+        <span class="r-form-emoji" id="r-form-emoji">☕</span>
+        <span class="r-form-body">
+          <span class="r-form-label" style="display:block">이렇게 즐겨보세요</span>
+          <span class="r-form-name" id="r-form-name" style="display:block"></span>
+          <span class="r-form-tip" id="r-form-tip" style="display:block"></span>
+        </span>
+      </div>
       <div class="r-picks" id="r-picks">
         <p class="r-picks-label">당신의 선택</p>
         <div class="r-picks-chips" id="r-picks-chips"></div>
@@ -457,7 +479,7 @@ footer a:hover{color:var(--stamp)}
       </div>
     </div>
     <div class="subrec">
-      <p class="subrec-label">이런 제품도 잘 맞아요</p>
+      <p class="subrec-label">이런 커피도 잘 맞아요</p>
       <div class="subrec-list" id="subrec-list"></div>
     </div>
     <div class="result-actions">
@@ -475,7 +497,7 @@ footer a:hover{color:var(--stamp)}
 
 <script>
 /* ═══════════════════════════════════════════════════════════════
-   ★ 여기만 수정하면 됩니다 — 쇼핑몰 기본 설정
+   ★ 여기만 수정하면 됩니다 ① — 쇼핑몰 기본 설정
    ═══════════════════════════════════════════════════════════════ */
 const CONFIG = {
   shopName: "BEANS COFFEE ROASTERS",          // ← 쇼핑몰 이름 (상단에 표시)
@@ -483,108 +505,154 @@ const CONFIG = {
 };
 
 /* ═══════════════════════════════════════════════════════════════
-   ★ 제품 정보 — 원두커피 / 드립백 / 드립에센스, 총 7종
-   name / notes / desc / url 을 내 상품에 맞게 수정하세요.
+   ★ 여기만 수정하면 됩니다 ② — 커피 11종
+   올데이 컬렉션 4종(시간대별 블렌딩) + 대표 스페셜티 7종
    url: 카페24 상품 상세페이지 주소를 그대로 붙여넣기
-        (예: https://내쇼핑몰.cafe24.com/product/detail.html?product_no=123)
    ═══════════════════════════════════════════════════════════════ */
-const PRODUCTS = {
-  beans200: {
-    cat: "원두커피",
-    name: "원두커피 200g",
-    en: "Whole Bean Coffee 200g",
-    nickname: "향부터 즐기는 홈카페 입문자",
-    emoji: "🫘",
-    notes: ["그라인더·드립기구용", "갓 볶은 신선함", "2주 소진 최적"],
-    desc: "그라인더와 드립 기구가 있다면, 집이 곧 카페가 됩니다. 원두를 가는 순간 퍼지는 향은 홀빈만의 특권. 200g은 가장 신선할 때 다 마실 수 있는 홈카페 입문 최적 용량입니다.",
-    url: "https://YOUR-SHOP.cafe24.com/product/detail.html?product_no=201",
+const COFFEES = {
+  /* ── 올데이 컬렉션 — 마시는 시간대에 맞춘 블렌드 ── */
+  morningzest: {
+    collection: "올데이 컬렉션", name: "모닝제스트",
+    en: "All-Day Collection · Morning Zest",
+    nickname: "상큼하게 하루를 여는 얼리버드",
+    emoji: "🌅",
+    notes: ["산미", "아침 첫 잔", "상큼한 시트러스"],
+    desc: "잠든 미각을 깨우는 상큼한 산미 블렌드. 아침 첫 잔을 위해 설계했습니다 — 출근길 정신이 번쩍 드는 산뜻한 제스트가 하루의 시작을 가볍게 만들어요.",
+    url: "https://YOUR-SHOP.cafe24.com/product/detail.html?product_no=301",
   },
-  beans500: {
-    cat: "원두커피",
-    name: "원두커피 500g",
-    en: "Whole Bean Coffee 500g",
-    nickname: "매일 내리는 홈바리스타",
-    emoji: "☕",
-    notes: ["홈카페 데일리", "나만의 레시피", "신선함·가성비 밸런스"],
-    desc: "매일 한두 잔, 물줄기와 뜸 시간까지 바리스타처럼 내 레시피로 즐기는 분께. 꾸준히 마시는 홈카페족에게 신선함과 가성비의 균형이 가장 좋은 500g을 추천해요.",
-    url: "https://YOUR-SHOP.cafe24.com/product/detail.html?product_no=202",
+  middayharmony: {
+    collection: "올데이 컬렉션", name: "미드데이하모니",
+    en: "All-Day Collection · Midday Harmony",
+    nickname: "점심의 달콤한 균형주의자",
+    emoji: "🌞",
+    notes: ["단맛", "점심 후 한 잔", "부드러운 조화"],
+    desc: "식사 후 나른해지는 한낮, 부드러운 단맛으로 오후의 균형을 잡아주는 점심 블렌드입니다. 밥 먹고 마시는 그 한 잔이 제일 맛있는 분께.",
+    url: "https://YOUR-SHOP.cafe24.com/product/detail.html?product_no=302",
   },
-  beans1kg: {
-    cat: "원두커피",
-    name: "원두커피 1kg+",
-    en: "Whole Bean Coffee 1kg+",
-    nickname: "스케일이 다른 커피 대장",
-    emoji: "📦",
-    notes: ["대용량", "업소·헤비유저", "g당 최고 가성비"],
-    desc: "하루에도 여러 잔, 온 가족·온 팀이 함께라면 1kg 이상 대용량이 답입니다. 카페·매장에서도 쓰는 업소용 용량으로, g당 가격이 가장 합리적이에요.",
-    url: "https://YOUR-SHOP.cafe24.com/product/detail.html?product_no=203",
+  afternoonbold: {
+    collection: "올데이 컬렉션", name: "애프터눈볼드",
+    en: "All-Day Collection · Afternoon Bold",
+    nickname: "오후를 다시 세우는 카페인 부스터",
+    emoji: "🌆",
+    notes: ["쓴맛", "오후 부스터", "진한 여운"],
+    desc: "집중력이 꺾이는 오후 3시를 위한 진한 쓴맛 블렌드. 묵직한 한 모금이 흐트러진 오후를 다시 일으켜 세웁니다.",
+    url: "https://YOUR-SHOP.cafe24.com/product/detail.html?product_no=303",
   },
-  dripbag12: {
-    cat: "드립백커피",
-    name: "드립백커피 12g",
-    en: "Drip Bag Coffee 12g",
-    nickname: "어디서든 카페를 여는 커피 유목민",
-    emoji: "🎒",
-    notes: ["기구 필요 없음", "물만 부으면 끝", "휴대 간편"],
-    desc: "기구 없이 컵에 걸고 뜨거운 물만 부으면, 언제 어디서든 카페 한 잔이 완성됩니다. 사무실 서랍, 여행 가방, 캠핑 백팩 어디든 들어가는 12g 드립백입니다.",
-    url: "https://YOUR-SHOP.cafe24.com/product/detail.html?product_no=204",
+  twilightamber: {
+    collection: "올데이 컬렉션", name: "트와일라잇엠버",
+    en: "All-Day Collection · Twilight Amber (Decaf)",
+    nickname: "저녁에도 커피를 포기 못 하는 낭만가",
+    emoji: "🍠",
+    notes: ["디카페인", "저녁에도 OK", "달콤한 군고구마"],
+    desc: "카페인 걱정 없는 디카페인 블렌드 — 달콤한 군고구마 향이 저녁을 포근하게 감쌉니다. 하루의 마무리에도 커피를 포기하지 마세요.",
+    url: "https://YOUR-SHOP.cafe24.com/product/detail.html?product_no=304",
   },
-  dripbag20: {
-    cat: "드립백커피",
-    name: "드립백커피 20g 대용량",
-    en: "Drip Bag Coffee 20g",
-    nickname: "타협 없는 진한 맛 원칙주의자",
-    emoji: "🔥",
-    notes: ["전문점과 같은 원두량", "진한 풍미", "대용량 드립백"],
-    desc: "전문점 핸드드립과 같은 20g 원두량을 그대로 담았습니다. 드립백인데도 진하고 풍부해서, '드립백은 연하다'에 아쉬웠던 분을 위한 대용량 드립백이에요.",
-    url: "https://YOUR-SHOP.cafe24.com/product/detail.html?product_no=205",
+  /* ── 대표 스페셜티 ── */
+  josangil: {
+    collection: "대표 스페셜티", name: "조상일 블렌드",
+    en: "Signature Josangil Blend",
+    nickname: "로스터의 원픽을 알아본 안목가",
+    emoji: "👑",
+    notes: ["밸런스", "로스터 시그니처", "매일 마셔도 질리지 않는"],
+    desc: "로스터가 이름을 걸고 만든 시그니처 밸런스 블렌드. 산미·단맛·쓴맛 어느 쪽으로도 기울지 않아 매일 마셔도 질리지 않습니다. 뭘 고를지 모르겠다면, 이걸로 시작하세요.",
+    url: "https://YOUR-SHOP.cafe24.com/product/detail.html?product_no=305",
   },
-  essence500: {
-    cat: "드립에센스",
-    name: "드립에센스 500ml",
-    en: "Drip Essence 500ml",
-    nickname: "10초 만에 완성하는 만능 홈카페러",
-    emoji: "⏱️",
-    notes: ["10초 완성", "핫·아이스·라떼 만능", "핸드드립 농축 원액"],
-    desc: "핸드드립 커피를 그대로 농축한 원액입니다. 더치(콜드브루)와 달리 따뜻하게 마셔도 맛있고, 물이나 우유에 부으면 10초 만에 완성 — 라떼까지 홈카페 메뉴가 됩니다.",
-    url: "https://YOUR-SHOP.cafe24.com/product/detail.html?product_no=206",
+  ethiopia: {
+    collection: "대표 스페셜티", name: "에티오피아 아리차",
+    en: "Ethiopia Aricha Amy Natural G1",
+    nickname: "화사한 향을 쫓는 커피 탐험가",
+    emoji: "🍓",
+    notes: ["산미", "베리·플로럴", "내추럴 G1"],
+    desc: "아리차 에이미 스테이션의 내추럴 G1. 잘 익은 베리와 꽃향이 터지는 화사한 산미 — 커피에서 과일을 느끼고 싶다면 바로 이 잔입니다.",
+    url: "https://YOUR-SHOP.cafe24.com/product/detail.html?product_no=306",
   },
-  essence1L: {
-    cat: "드립에센스",
-    name: "드립에센스 1L+",
-    en: "Drip Essence 1L+",
-    nickname: "머신 없이 카페를 여는 사장님",
-    emoji: "🏪",
-    notes: ["카페 납품용", "머신·그라인더 없이 판매", "10초 제조"],
-    desc: "에스프레소 머신도 그라인더도 없이, 물·우유만으로 커피 메뉴를 판매할 수 있는 매장용 대용량 원액입니다. 핫·아이스·라떼 모두 10초면 제공 — 소규모 카페, 베이커리, 브런치집 납품에 딱입니다.",
-    url: "https://YOUR-SHOP.cafe24.com/product/detail.html?product_no=207",
+  png: {
+    collection: "대표 스페셜티", name: "파푸아뉴기니 마라와카",
+    en: "PNG Marawaka Blue Mountain",
+    nickname: "부드러운 단맛의 프리미엄 미식가",
+    emoji: "🍯",
+    notes: ["단맛", "블루마운틴 혈통", "부드러운 목넘김"],
+    desc: "'블루마운틴' 혈통의 파푸아뉴기니 마라와카. 자극 없이 부드럽고 은은한 단맛이 길게 이어집니다 — 달콤한 커피의 프리미엄 기준.",
+    url: "https://YOUR-SHOP.cafe24.com/product/detail.html?product_no=307",
+  },
+  guatemala: {
+    collection: "대표 스페셜티", name: "과테말라 안티구아",
+    en: "San Lorenzo El Cubo · Finca Medina SHB",
+    nickname: "깊이를 아는 클래식 정통파",
+    emoji: "🌋",
+    notes: ["쓴맛", "다크초콜릿", "스모키"],
+    desc: "안티구아 산 로렌조 엘 쿠보, 핀카 메디나 농장의 SHB 등급. 다크초콜릿의 쌉싸름함과 스모키한 여운 — 쓴맛이 '깊은 맛'이라는 걸 아는 분을 위한 정통파입니다.",
+    url: "https://YOUR-SHOP.cafe24.com/product/detail.html?product_no=308",
+  },
+  kenya: {
+    collection: "대표 스페셜티", name: "케냐 마사이",
+    en: "Kenya Masai AA",
+    nickname: "산미도 쓴맛도 포기 못 하는 욕심쟁이",
+    emoji: "🦁",
+    notes: ["산미+쓴맛", "묵직한 과일", "강렬한 한 잔"],
+    desc: "마사이 AA — 진한 과일 산미와 묵직한 쓴맛이 한 잔에 공존합니다. 밋밋한 커피로는 성이 차지 않는 당신께.",
+    url: "https://YOUR-SHOP.cafe24.com/product/detail.html?product_no=309",
+  },
+  colombia: {
+    collection: "대표 스페셜티", name: "콜롬비아 후일라",
+    en: "Colombia Huila Supremo",
+    nickname: "고소하고 묵직한 바디파",
+    emoji: "🌰",
+    notes: ["고소함+바디", "너티", "묵직한 목넘김"],
+    desc: "후일라 수프리모 — 고소한 견과류 향과 묵직한 바디감. 우유를 만나도 무너지지 않아 라떼 베이스로도 훌륭합니다.",
+    url: "https://YOUR-SHOP.cafe24.com/product/detail.html?product_no=310",
+  },
+  brazil: {
+    collection: "대표 스페셜티", name: "브라질 미나스제라이스",
+    en: "Brazil Minas Gerais",
+    nickname: "구수한 매력의 편안한 힐링러",
+    emoji: "🥜",
+    notes: ["고소함", "구수한 곡물", "편안한 데일리"],
+    desc: "미나스 제라이스 — 구수한 곡물과 견과의 편안한 고소함. 자극 없이 하루 종일 마시기 좋은 데일리 커피입니다.",
+    url: "https://YOUR-SHOP.cafe24.com/product/detail.html?product_no=311",
   },
 };
 
 /* ═══════════════════════════════════════════════════════════════
-   MBTI 글자별 가중치 — 각 글자가 어울리는 제품에 1점씩
+   ★ 여기만 수정하면 됩니다 ③ — 제품 형태 7종 (결과의 "이렇게 즐겨보세요")
+   url을 채우면 결과 화면에서 형태 제안도 링크로 연결됩니다 (빈칸이면 안내만)
+   ═══════════════════════════════════════════════════════════════ */
+const FORMS = {
+  beans200:   { name: "원두커피 200g", emoji: "🫘", tip: "그라인더가 있다면 갓 갈아 내려보세요 — 가장 신선할 때 다 마시는 홈카페 입문 용량.", url: "" },
+  beans500:   { name: "원두커피 500g", emoji: "☕", tip: "매일 마시는 홈카페라면 신선함과 가성비의 균형이 딱 좋은 500g.", url: "" },
+  beans1kg:   { name: "원두커피 1kg+", emoji: "📦", tip: "여럿이, 매장에서, 넉넉하게 — g당 가격이 가장 합리적인 대용량.", url: "" },
+  dripbag12:  { name: "드립백커피 12g", emoji: "🎒", tip: "기구 없이 컵에 걸고 물만 부으면 완성 — 사무실·여행 어디서든.", url: "" },
+  dripbag20:  { name: "드립백커피 20g 대용량", emoji: "🔥", tip: "전문점 핸드드립과 같은 20g 원두량 — 드립백인데도 진하게.", url: "" },
+  essence500: { name: "드립에센스 500ml", emoji: "⏱️", tip: "물·우유에 부으면 10초 완성. 더치와 달리 따뜻하게도 맛있고 라떼도 OK.", url: "" },
+  essence1L:  { name: "드립에센스 1L+", emoji: "🏪", tip: "에스프레소 머신·그라인더 없이 커피 메뉴 판매 — 카페·매장 납품용.", url: "" },
+};
+
+/* ═══════════════════════════════════════════════════════════════
+   MBTI 글자별 가중치 — coffee(커피 점수) / form(형태 점수)
    ═══════════════════════════════════════════════════════════════ */
 const MBTI_LETTER_POINTS = {
-  E: { dripbag12: 1, essence500: 1 },   // 활동적 — 어디서든, 손님 접대까지
-  I: { beans200: 1, beans500: 1 },      // 나만의 홈카페 몰입
-  S: { beans500: 1, dripbag12: 1 },     // 검증된 익숙한 방식
-  N: { essence500: 1, dripbag20: 1 },   // 새로운 방식에 호기심
-  T: { essence500: 1, beans1kg: 1 },    // 효율·가성비 중시
-  F: { beans200: 1, dripbag12: 1 },     // 향과 분위기의 감성
-  J: { beans500: 1, dripbag20: 1 },     // 루틴·계획적 소비
-  P: { dripbag12: 1, essence500: 1 },   // 즉흥, 간편함이 최고
+  E: { coffee: { kenya: 1 },     form: { dripbag12: 1, essence500: 1 } },
+  I: { coffee: { josangil: 1 },  form: { beans200: 1, beans500: 1 } },
+  S: { coffee: { brazil: 1 },    form: { beans500: 1, dripbag12: 1 } },
+  N: { coffee: { ethiopia: 1 },  form: { essence500: 1, dripbag20: 1 } },
+  T: { coffee: { guatemala: 1 }, form: { essence500: 1, beans1kg: 1 } },
+  F: { coffee: { png: 1 },       form: { beans200: 1, dripbag12: 1 } },
+  J: { coffee: { colombia: 1 },  form: { beans500: 1, dripbag20: 1 } },
+  P: { coffee: { morningzest: 1 }, form: { dripbag12: 1, essence500: 1 } },
 };
 const MBTI_TYPES = ["ISTJ","ISFJ","INFJ","INTJ","ISTP","ISFP","INFP","INTP","ESTP","ESFP","ENFP","ENTP","ESTJ","ESFJ","ENFJ","ENTJ"];
 function mbtiOption(type) {
-  const points = {};
+  const coffee = {}, form = {};
   for (const letter of type) {
-    for (const [k, v] of Object.entries(MBTI_LETTER_POINTS[letter] || {})) points[k] = (points[k] || 0) + v;
+    const w = MBTI_LETTER_POINTS[letter] || {};
+    Object.entries(w.coffee || {}).forEach(([k, v]) => { coffee[k] = (coffee[k] || 0) + v; });
+    Object.entries(w.form || {}).forEach(([k, v]) => { form[k] = (form[k] || 0) + v; });
   }
-  return { title: type, points, reason: `${type} 성향 반영` };
+  return { title: type, coffee, form, reason: `${type} 성향 반영` };
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   질문 데이터 — points의 숫자만큼 해당 제품에 점수가 쌓입니다
+   질문 12개 — coffee/form에 적은 숫자만큼 점수가 쌓입니다
    ═══════════════════════════════════════════════════════════════ */
 const QUESTIONS = [
   {
@@ -592,74 +660,91 @@ const QUESTIONS = [
     hint: "성향에 맞는 커피 스타일을 찾아드려요",
     options: [
       ...MBTI_TYPES.map(mbtiOption),
-      { title: "잘 몰라요", skip: true, points: {}, reason: "" },
+      { title: "잘 몰라요", skip: true, coffee: {}, form: {}, reason: "" },
     ],
   },
   {
     cat: "나이", q: "당신의 연령대는?", layout: "grid",
     options: [
-      { emoji: "🌱", title: "10~20대", desc: "간편하고 힙하게", points: { dripbag12: 1, essence500: 1 }, reason: "간편함이 먼저인 10~20대" },
-      { emoji: "🔥", title: "30대", desc: "바빠도 맛은 포기 못 함", points: { beans200: 1, essence500: 1 }, reason: "바쁜 일상 속 홈카페 30대" },
-      { emoji: "🌳", title: "40대", desc: "본격 홈카페의 맛", points: { beans500: 1, dripbag20: 1 }, reason: "본격 홈카페 40대" },
-      { emoji: "🏔️", title: "50대 이상", desc: "넉넉하고 진하게", points: { beans1kg: 1, dripbag20: 1 }, reason: "넉넉하고 진한 클래식" },
+      { emoji: "🌱", title: "10~20대", desc: "새로운 게 좋아요", coffee: { ethiopia: 1 }, form: { dripbag12: 1, essence500: 1 }, reason: "새로움을 즐기는 10~20대" },
+      { emoji: "🔥", title: "30대", desc: "바빠도 맛은 포기 못 함", coffee: { josangil: 1 }, form: { beans200: 1, essence500: 1 }, reason: "바쁜 일상 속 홈카페 30대" },
+      { emoji: "🌳", title: "40대", desc: "본격 홈카페의 맛", coffee: { guatemala: 1 }, form: { beans500: 1, dripbag20: 1 }, reason: "본격 홈카페 40대" },
+      { emoji: "🏔️", title: "50대 이상", desc: "구수하고 진하게", coffee: { brazil: 1 }, form: { beans1kg: 1, dripbag20: 1 }, reason: "클래식을 아는 연륜" },
     ],
   },
   {
     cat: "장소", q: "이 커피, 주로 어디서 마시나요?", layout: "grid",
     options: [
-      { emoji: "🏠", title: "집 · 홈카페", desc: "나와 가족의 일상 한 잔", points: { beans200: 2, beans500: 2, essence500: 1 }, reason: "집에서 즐기는 홈카페" },
-      { emoji: "🏢", title: "사무실 · 스터디", desc: "책상 위 각성 연료", points: { dripbag12: 3, dripbag20: 1, essence500: 1 }, reason: "사무실 책상 위 한 잔" },
-      { emoji: "☕", title: "카페 · 매장 납품", desc: "손님에게 낼 커피를 찾아요", points: { essence1L: 8, beans1kg: 4, dripbag20: 1 }, reason: "매장 운영·납품용" },
-      { emoji: "🏕️", title: "야외 · 여행", desc: "밖에서도 커피는 포기 못 해", points: { dripbag12: 3, dripbag20: 2 }, reason: "야외에서도 커피와 함께" },
+      { emoji: "🏠", title: "집 · 홈카페", desc: "나와 가족의 일상 한 잔", coffee: {}, form: { beans200: 2, beans500: 2, essence500: 1 }, reason: "집에서 즐기는 홈카페" },
+      { emoji: "🏢", title: "사무실 · 스터디", desc: "책상 위 각성 연료", coffee: {}, form: { dripbag12: 3, dripbag20: 1, essence500: 1 }, reason: "사무실 책상 위 한 잔" },
+      { emoji: "☕", title: "카페 · 매장 납품", desc: "손님에게 낼 커피를 찾아요", coffee: { josangil: 1 }, form: { essence1L: 8, beans1kg: 4, dripbag20: 1 }, reason: "매장 운영·납품용" },
+      { emoji: "🏕️", title: "야외 · 여행", desc: "밖에서도 커피는 포기 못 해", coffee: {}, form: { dripbag12: 3, dripbag20: 2 }, reason: "야외에서도 커피와 함께" },
+    ],
+  },
+  {
+    cat: "시간대", q: "커피가 가장 당기는 시간은?", layout: "grid",
+    hint: "그 시간을 위해 만든 올데이 컬렉션이 있거든요",
+    options: [
+      { emoji: "🌅", title: "아침", desc: "눈 뜨자마자 모닝커피", coffee: { morningzest: 3, ethiopia: 1, kenya: 1 }, form: { essence500: 1, dripbag12: 1 }, reason: "아침 첫 잔 루틴" },
+      { emoji: "🌞", title: "점심", desc: "식사 후 나른할 때", coffee: { middayharmony: 3, png: 1, josangil: 1 }, form: {}, reason: "점심 후 한 잔 루틴" },
+      { emoji: "🌆", title: "오후", desc: "집중력이 필요한 오후", coffee: { afternoonbold: 3, guatemala: 1, colombia: 1 }, form: {}, reason: "오후 부스터 루틴" },
+      { emoji: "🌙", title: "저녁", desc: "하루를 마무리하며", coffee: { twilightamber: 4 }, form: {}, reason: "저녁 디카페인 루틴" },
+    ],
+  },
+  {
+    cat: "취향", q: "커피에서 어떤 향이 먼저 끌리나요?",
+    options: [
+      { emoji: "🍋", title: "새콤한 과일·베리 향", desc: "산미가 있어야 커피지", coffee: { ethiopia: 2, kenya: 2, morningzest: 2 }, form: {}, reason: "상큼한 산미파" },
+      { emoji: "🥜", title: "고소한 견과·곡물 향", desc: "구수한 게 최고야", coffee: { brazil: 2, colombia: 2, twilightamber: 1 }, form: {}, reason: "고소한 너티파" },
+    ],
+  },
+  {
+    cat: "취향", q: "여운은 어느 쪽이 좋아요?",
+    options: [
+      { emoji: "🍯", title: "달콤한 캐러멜·꿀", desc: "단맛이 은은하게 남게", coffee: { png: 2, middayharmony: 2, twilightamber: 1, josangil: 1 }, form: {}, reason: "달콤한 여운파" },
+      { emoji: "🍫", title: "쌉싸름한 다크초콜릿", desc: "쓴맛이 깊은 맛이야", coffee: { guatemala: 2, afternoonbold: 2, kenya: 1 }, form: {}, reason: "쌉싸름한 다크파" },
     ],
   },
   {
     cat: "기구", q: "커피 기구, 갖고 계세요?",
     options: [
-      { emoji: "⚙️", title: "그라인더·드립세트 있어요", desc: "장비 세팅 완료, 갈아서 내립니다", points: { beans200: 2, beans500: 2, beans1kg: 1 }, reason: "홈카페 장비 보유" },
-      { emoji: "🥤", title: "컵과 물이면 충분해요", desc: "장비는 미니멀하게", points: { dripbag12: 2, essence500: 2, dripbag20: 1 }, reason: "기구 없이 간편하게" },
+      { emoji: "⚙️", title: "그라인더·드립세트 있어요", desc: "장비 세팅 완료, 갈아서 내립니다", coffee: {}, form: { beans200: 2, beans500: 2, beans1kg: 1 }, reason: "홈카페 장비 보유" },
+      { emoji: "🥤", title: "컵과 물이면 충분해요", desc: "장비는 미니멀하게", coffee: {}, form: { dripbag12: 2, essence500: 2, dripbag20: 1 }, reason: "기구 없이 간편하게" },
     ],
   },
   {
     cat: "시간", q: "커피 한 잔에 쓸 시간은?",
     options: [
-      { emoji: "⏳", title: "내리는 과정이 곧 힐링", desc: "갈고, 뜸 들이고, 천천히", points: { beans200: 2, beans500: 1 }, reason: "핸드드립 리추얼파" },
-      { emoji: "⚡", title: "바빠요, 10초컷이요", desc: "맛은 절대 포기 못 함", points: { essence500: 2, dripbag12: 1, essence1L: 1 }, reason: "10초 완성파" },
+      { emoji: "⏳", title: "내리는 과정이 곧 힐링", desc: "갈고, 뜸 들이고, 천천히", coffee: {}, form: { beans200: 2, beans500: 1 }, reason: "핸드드립 리추얼파" },
+      { emoji: "⚡", title: "바빠요, 10초컷이요", desc: "맛은 절대 포기 못 함", coffee: {}, form: { essence500: 2, dripbag12: 1, essence1L: 1 }, reason: "10초 완성파" },
     ],
   },
   {
     cat: "습관", q: "하루 커피 소비량은?",
     options: [
-      { emoji: "🍵", title: "하루 한두 잔, 소중하게", desc: "한 잔의 퀄리티가 중요", points: { beans200: 1, dripbag12: 2, essence500: 1 }, reason: "하루 한두 잔 음미파" },
-      { emoji: "♾️", title: "종일 여러 잔, 다 같이", desc: "혼자 아니고 여럿이 마셔요", points: { beans1kg: 2, beans500: 1, essence1L: 2, dripbag20: 1 }, reason: "커피 헤비유저" },
+      { emoji: "🍵", title: "하루 한두 잔, 소중하게", desc: "한 잔의 퀄리티가 중요", coffee: {}, form: { beans200: 1, dripbag12: 2, essence500: 1 }, reason: "하루 한두 잔 음미파" },
+      { emoji: "♾️", title: "종일 여러 잔, 다 같이", desc: "혼자 아니고 여럿이 마셔요", coffee: {}, form: { beans1kg: 2, beans500: 1, essence1L: 2, dripbag20: 1 }, reason: "커피 헤비유저" },
     ],
   },
   {
     cat: "취향", q: "커피의 농도는?",
     options: [
-      { emoji: "🌑", title: "진하게, 꽉 차게", desc: "연한 커피는 서운해요", points: { dripbag20: 2, essence500: 1, beans1kg: 1 }, reason: "진한 커피파" },
-      { emoji: "☁️", title: "부드럽고 편안하게", desc: "은은한 게 좋아요", points: { dripbag12: 1, beans200: 1, beans500: 1 }, reason: "부드러운 커피파" },
+      { emoji: "🌑", title: "진하게, 꽉 차게", desc: "연한 커피는 서운해요", coffee: { colombia: 1, guatemala: 1, kenya: 1, afternoonbold: 1 }, form: { dripbag20: 2 }, reason: "진한 커피파" },
+      { emoji: "☁️", title: "부드럽고 편안하게", desc: "은은한 게 좋아요", coffee: { josangil: 1, png: 1, middayharmony: 1 }, form: { dripbag12: 1 }, reason: "부드러운 커피파" },
     ],
   },
   {
     cat: "메뉴", q: "당신의 최애 메뉴는?",
     options: [
-      { emoji: "⚫", title: "블랙 — 커피 본연의 맛", desc: "아무것도 섞지 않아요", points: { beans200: 1, beans500: 1, dripbag20: 1 }, reason: "블랙커피 순수파" },
-      { emoji: "🥛", title: "라떼 — 우유를 만나야 완성", desc: "바닐라라떼도 환영", points: { essence500: 2, essence1L: 1 }, reason: "라떼 러버" },
-    ],
-  },
-  {
-    cat: "쇼핑", q: "커피 쇼핑 스타일은?",
-    options: [
-      { emoji: "📦", title: "넉넉하게 쟁여두기", desc: "떨어지면 불안해요", points: { beans1kg: 2, dripbag20: 2, essence1L: 1, beans500: 1 }, reason: "든든한 대용량파" },
-      { emoji: "🌿", title: "조금씩 자주, 신선하게", desc: "그때그때 새 걸로", points: { beans200: 2, dripbag12: 1, essence500: 1 }, reason: "신선한 소용량파" },
+      { emoji: "⚫", title: "블랙 — 커피 본연의 맛", desc: "아무것도 섞지 않아요", coffee: { josangil: 1, ethiopia: 1 }, form: { beans500: 1 }, reason: "블랙커피 순수파" },
+      { emoji: "🥛", title: "라떼 — 우유를 만나야 완성", desc: "바닐라라떼도 환영", coffee: { colombia: 1, guatemala: 1 }, form: { essence500: 2, essence1L: 1 }, reason: "라떼 러버" },
     ],
   },
   {
     cat: "온도", q: "지금 당기는 온도는?",
     options: [
-      { emoji: "🧊", title: "얼음 가득 아이스", desc: "한겨울에도 얼죽아", points: { essence500: 2, dripbag20: 1 }, reason: "사계절 얼죽아" },
-      { emoji: "♨️", title: "김이 모락모락 따뜻하게", desc: "온기가 곧 힐링", points: { beans500: 1, beans200: 1, dripbag12: 1 }, reason: "따뜻한 한 잔파" },
+      { emoji: "🧊", title: "얼음 가득 아이스", desc: "한겨울에도 얼죽아", coffee: { kenya: 1, ethiopia: 1 }, form: { essence500: 1, dripbag20: 1 }, reason: "사계절 얼죽아" },
+      { emoji: "♨️", title: "김이 모락모락 따뜻하게", desc: "온기가 곧 힐링", coffee: { guatemala: 1, brazil: 1, twilightamber: 1 }, form: { beans200: 1, dripbag12: 1 }, reason: "따뜻한 한 잔파" },
     ],
   },
 ];
@@ -685,7 +770,7 @@ function initIntro() {
   $("brand-name").textContent = CONFIG.shopName;
   $("brand-link").href = CONFIG.shopUrl;
   $("footer-link").href = CONFIG.shopUrl;
-  $("lineup-tags").innerHTML = Object.values(PRODUCTS)
+  $("lineup-tags").innerHTML = Object.values(COFFEES)
     .map((c) => `<span>${c.emoji} ${c.name}</span>`).join("");
 }
 
@@ -762,7 +847,7 @@ function goBack() {
 }
 
 /* ── 분석 연출 ── */
-const LOADING_LINES = ["취향 데이터 분석 중...", "원두·드립백·에센스 대조 중...", "딱 맞는 용량 계산 중...", "당신의 커피를 찾았어요!"];
+const LOADING_LINES = ["취향 데이터 분석 중...", "올데이 컬렉션 대조 중...", "스페셜티 라인업 확인 중...", "당신의 커피를 찾았어요!"];
 function startLoading() {
   showScreen("loading");
   let step = 0;
@@ -774,37 +859,51 @@ function startLoading() {
   setTimeout(() => { clearInterval(timer); showResult(computeResult()); }, 2500);
 }
 
-/* ── 결과 계산 ── */
+/* ── 결과 계산: 커피 점수와 형태 점수를 따로 합산 ── */
 function computeResult() {
-  const scores = {};
-  Object.keys(PRODUCTS).forEach((k) => (scores[k] = 0));
+  const coffeeScores = {}, formScores = {};
+  Object.keys(COFFEES).forEach((k) => (coffeeScores[k] = 0));
+  Object.keys(FORMS).forEach((k) => (formScores[k] = 0));
   answers.forEach(({ option }) => {
-    Object.entries(option.points).forEach(([k, v]) => { scores[k] += v; });
+    Object.entries(option.coffee || {}).forEach(([k, v]) => { coffeeScores[k] += v; });
+    Object.entries(option.form || {}).forEach(([k, v]) => { formScores[k] += v; });
   });
-  const ranked = Object.keys(PRODUCTS).sort((a, b) => scores[b] - scores[a]);
+  const ranked = Object.keys(COFFEES).sort((a, b) => coffeeScores[b] - coffeeScores[a]);
   const [top, second, third] = ranked;
-  const pct = Math.min(98, Math.max(87, 87 + Math.round((scores[top] - scores[second]) * 2.5)));
+  const formTop = Object.keys(FORMS).sort((a, b) => formScores[b] - formScores[a])[0];
+  const pct = Math.min(98, Math.max(87, 87 + Math.round((coffeeScores[top] - coffeeScores[second]) * 2.5)));
   const reasons = [];
   answers
-    .filter(({ option }) => option.points[top])
-    .sort((a, b) => (b.option.points[top] || 0) - (a.option.points[top] || 0))
+    .filter(({ option }) => (option.coffee || {})[top])
+    .sort((a, b) => ((b.option.coffee || {})[top] || 0) - ((a.option.coffee || {})[top] || 0))
     .slice(0, 3)
     .forEach(({ option }) => { if (option.reason) reasons.push(option.reason); });
-  return { key: top, subs: [second, third], pct, reasons, shared: false };
+  return { key: top, subs: [second, third], formKey: formTop, pct, reasons, shared: false };
 }
 
 /* ── 결과 렌더 ── */
-function showResult({ key, subs, pct, reasons, shared }) {
-  const c = PRODUCTS[key];
+function showResult({ key, subs, formKey, pct, reasons, shared }) {
+  const c = COFFEES[key];
   $("r-no").textContent = String(((hashCode(key) % 9000) + 1000));
   $("r-emoji").textContent = c.emoji;
   $("r-nickname").textContent = `당신은 「${c.nickname}」`;
-  $("r-cat").textContent = `${c.cat} 라인`;
+  $("r-cat").textContent = c.collection;
   $("r-name").textContent = c.name;
   $("r-en").textContent = c.en;
   $("r-notes").innerHTML = c.notes.map((n) => `<span>${n}</span>`).join("");
   $("r-desc").textContent = c.desc;
   $("btn-buy").href = c.url;
+
+  const formBox = $("r-form");
+  if (formKey && FORMS[formKey]) {
+    const f = FORMS[formKey];
+    formBox.style.display = "";
+    $("r-form-emoji").textContent = f.emoji;
+    $("r-form-name").textContent = f.name;
+    $("r-form-tip").textContent = f.tip;
+  } else {
+    formBox.style.display = "none";
+  }
 
   const picksBox = $("r-picks");
   if (shared || !reasons.length) {
@@ -815,7 +914,7 @@ function showResult({ key, subs, pct, reasons, shared }) {
   }
 
   $("subrec-list").innerHTML = subs.map((k, idx) => {
-    const s = PRODUCTS[k];
+    const s = COFFEES[k];
     return `<a class="stub" href="${s.url}" target="_blank" rel="noopener">
       <span class="s-rank">${idx ? "3rd" : "2nd"} Pick ${idx ? "③" : "②"}</span>
       <span class="s-name">${s.emoji} ${s.name}</span>
@@ -852,7 +951,7 @@ let currentResultKey = null;
 function shareResult() {
   if (!currentResultKey) return;
   const url = `${location.origin}${location.pathname}?result=${currentResultKey}`;
-  const c = PRODUCTS[currentResultKey];
+  const c = COFFEES[currentResultKey];
   const text = `☕ 나의 인생 커피는 「${c.name}」 — ${c.nickname}! 너도 찾아봐`;
   if (navigator.share) {
     navigator.share({ title: "커피 취향 월드컵", text, url }).catch(() => {});
@@ -905,9 +1004,10 @@ initIntro();
 if (document.fonts && document.fonts.load) {
   const displayText = [
     "취향으로 찾는 나의 인생 커피", "테스트 시작하기", "PICK!",
-    "당신의 커피를 내리는 중", "이 커피 구매하러 가기", "다시 하기", "나도 테스트 하기",
+    "당신의 커피를 내리는 중", "이 커피 구매하러 가기", "다시 하기", "나도 테스트 하기", "이렇게 즐겨보세요",
     ...QUESTIONS.flatMap((q) => [q.q, ...q.options.map((o) => o.title)]),
-    ...Object.values(PRODUCTS).map((c) => c.name),
+    ...Object.values(COFFEES).map((c) => c.name),
+    ...Object.values(FORMS).map((f) => f.name),
   ].join("");
   const tryDisplayFont = () => {
     if (document.documentElement.classList.contains("df")) return;
@@ -921,9 +1021,9 @@ if (document.fonts && document.fonts.load) {
 
 /* 공유 링크(?result=키)로 들어온 경우 결과 바로 보여주기 */
 const sharedKey = new URLSearchParams(location.search).get("result");
-if (sharedKey && PRODUCTS[sharedKey]) {
-  const others = Object.keys(PRODUCTS).filter((k) => k !== sharedKey);
-  showResult({ key: sharedKey, subs: others.slice(0, 2), pct: 93, reasons: [], shared: true });
+if (sharedKey && COFFEES[sharedKey]) {
+  const others = Object.keys(COFFEES).filter((k) => k !== sharedKey);
+  showResult({ key: sharedKey, subs: others.slice(0, 2), formKey: null, pct: 93, reasons: [], shared: true });
 }
 </script>
 </body>
