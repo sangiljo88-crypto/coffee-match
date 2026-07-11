@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>커피 취향 월드컵 | 내 인생 커피 찾기</title>
+<meta name="description" content="MBTI·장소·습관·입맛으로 찾는 나만의 커피. 10번의 선택으로 원두·드립백·드립에센스 중 딱 맞는 제품을 추천받고 바로 구매까지!">
+<meta property="og:type" content="website">
+<meta property="og:title" content="커피 취향 월드컵 — 내 인생 커피 찾기">
+<meta property="og:description" content="MBTI부터 커피 습관까지, 10번의 선택이면 충분해요 ☕ 원두·드립백·드립에센스 중 딱 맞는 커피를 찾아드립니다">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>☕</text></svg>">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<!-- 폰트는 논블로킹으로: CDN이 느리거나 막혀도 페이지는 시스템 폰트로 즉시 동작 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=IBM+Plex+Mono:wght@500;600&display=swap" media="print" onload="this.media='all'">
+<noscript>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=IBM+Plex+Mono:wght@500;600&display=swap">
+</noscript>
+<style>
+:root{
+  --paper:#EAE0CC;
+  --paper-2:#E0D2B6;
+  --card:#F4EDDD;
+  --ink:#26190E;
+  --ink-soft:#5C4A38;
+  --ink-faint:#8A7660;
+  --stamp:#B8432F;
+  --stamp-deep:#93321F;
+  --bean:#77855F;
+  --caramel:#A9713F;
+  --line:#C9B896;
+  --hard-shadow:3px 3px 0 rgba(38,25,14,.16);
+  --font-body:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",sans-serif;
+  --font-mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  /* 디스플레이 폰트: Do Hyeon 로드 전엔 굵은 본문체로 폴백 */
+  --font-display:var(--font-body);
+  --fdw:800;
+}
+html.df{--font-display:"Do Hyeon",var(--font-body);--fdw:400}
+*{margin:0;padding:0;box-sizing:border-box}
+html{color-scheme:light}
+body{
+  font-family:var(--font-body);
+  background-color:var(--paper);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0.35 0 0 0 0 0.27 0 0 0 0 0.18 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)'/%3E%3C/svg%3E");
+  color:var(--ink);
+  line-height:1.6;
+  word-break:keep-all;
+  -webkit-font-smoothing:antialiased;
+  min-height:100dvh;
+  display:flex;
+  flex-direction:column;
+}
+.wrap{width:100%;max-width:760px;margin:0 auto;padding:0 20px;flex:1;display:flex;flex-direction:column}
+
+/* ── 상단 스트립 ─────────────────────────── */
+.topbar{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:14px 2px 12px;
+  border-bottom:1.5px dashed var(--line);
+  font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;
+  color:var(--ink-soft);text-transform:uppercase;
+}
+.topbar a{color:var(--stamp);text-decoration:none;font-weight:600}
+.topbar a:hover{text-decoration:underline}
+
+/* ── 화면 전환 ───────────────────────────── */
+.screen{display:none;flex:1;flex-direction:column;animation:screen-in .45s cubic-bezier(.2,.7,.3,1) both}
+.screen.on{display:flex}
+@keyframes screen-in{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+/* ── 인트로 ─────────────────────────────── */
+.intro{padding:44px 0 40px;gap:0}
+.eyebrow{
+  font-family:var(--font-mono);font-size:12px;font-weight:600;
+  letter-spacing:.22em;color:var(--stamp);text-transform:uppercase;
+  display:flex;align-items:center;gap:10px;
+}
+.eyebrow::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--stamp)}
+.intro h1{
+  font-family:var(--font-display);font-weight:var(--fdw);
+  font-size:clamp(44px,9.5vw,72px);line-height:1.14;letter-spacing:-.01em;
+  margin:18px 0 16px;text-wrap:balance;
+}
+.intro h1 em{font-style:normal;color:var(--stamp)}
+.intro .lede{font-size:17px;color:var(--ink-soft);max-width:34em}
+.intro .lede strong{color:var(--ink);font-weight:700}
+.meta-row{
+  display:flex;gap:22px;margin:26px 0 34px;
+  font-family:var(--font-mono);font-size:12px;font-weight:500;
+  color:var(--ink-faint);letter-spacing:.06em;
+}
+.meta-row b{display:block;font-size:20px;font-weight:600;color:var(--ink);letter-spacing:0}
+.btn-start{
+  font-family:var(--font-display);font-weight:var(--fdw);font-size:24px;letter-spacing:.02em;
+  background:var(--ink);color:var(--paper);border:none;cursor:pointer;
+  padding:18px 30px;border-radius:12px;
+  box-shadow:4px 4px 0 rgba(38,25,14,.22);
+  display:inline-flex;align-items:center;gap:12px;align-self:flex-start;
+  transition:transform .15s,box-shadow .15s,background .15s;
+}
+.btn-start:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 rgba(38,25,14,.22);background:#31200f}
+.btn-start:active{transform:translate(1px,1px);box-shadow:2px 2px 0 rgba(38,25,14,.22)}
+.btn-start .arr{font-family:var(--font-mono);font-size:18px;color:var(--caramel)}
+
+.lineup{margin-top:46px;border-top:1.5px dashed var(--line);padding-top:18px}
+.lineup-label{font-family:var(--font-mono);font-size:11px;letter-spacing:.2em;color:var(--ink-faint);text-transform:uppercase;margin-bottom:14px}
+.lineup-tags{display:flex;flex-wrap:wrap;gap:10px 8px}
+.lineup-tags span{
+  font-family:var(--font-mono);font-size:11.5px;font-weight:500;letter-spacing:.04em;
+  border:1.5px solid var(--line);border-radius:999px;padding:5px 12px;
+  color:var(--ink-soft);background:var(--card);
+  transform:rotate(var(--tilt,0deg));
+}
+.lineup-tags span:nth-child(odd){--tilt:-1.2deg}
+.lineup-tags span:nth-child(even){--tilt:1.1deg}
+
+/* ── 퀴즈 ───────────────────────────────── */
+.quiz{padding:22px 0 46px}
+.quiz-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:8px}
+.q-counter{font-family:var(--font-mono);font-size:13px;font-weight:600;letter-spacing:.1em;color:var(--stamp)}
+.q-cat{
+  font-family:var(--font-mono);font-size:11px;font-weight:600;letter-spacing:.16em;
+  color:var(--ink-soft);border:1.5px solid var(--line);border-radius:999px;
+  padding:4px 12px;background:var(--card);text-transform:uppercase;
+}
+/* 쿠폰 도장 진행판 */
+.punchcard{
+  background:var(--card);border:1.5px solid var(--line);border-radius:12px;
+  padding:12px 14px;display:flex;align-items:center;justify-content:space-between;gap:6px;
+  box-shadow:var(--hard-shadow);margin-bottom:30px;
+}
+.punch{
+  width:22px;height:22px;border-radius:50%;
+  border:1.6px dashed var(--ink-faint);position:relative;flex:none;
+}
+.punch.filled{border:none;background:var(--caramel)}
+.punch.filled::after{
+  content:"";position:absolute;left:50%;top:50%;width:2.5px;height:64%;
+  background:var(--card);border-radius:2px;
+  transform:translate(-50%,-50%) rotate(24deg);
+}
+.punch.stamp-in{animation:stamp-slam .38s cubic-bezier(.2,1.4,.4,1) both}
+@keyframes stamp-slam{
+  0%{transform:scale(2) rotate(-18deg);opacity:0}
+  62%{transform:scale(.9) rotate(4deg);opacity:1}
+  100%{transform:scale(1) rotate(0)}
+}
+.q-title{
+  font-family:var(--font-display);font-weight:var(--fdw);
+  font-size:clamp(27px,6vw,38px);line-height:1.25;text-align:center;
+  margin-bottom:10px;text-wrap:balance;
+}
+.q-hint{
+  font-size:13.5px;color:var(--ink-faint);text-align:center;margin-bottom:26px;
+}
+
+/* VS 티켓 대결 */
+.options-vs{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.vs-badge{
+  position:absolute;left:50%;top:50%;z-index:3;
+  transform:translate(-50%,-50%) rotate(-8deg);
+  width:58px;height:58px;border-radius:50%;
+  background:var(--stamp);color:var(--paper);
+  border:2.5px solid var(--paper);outline:2.5px solid var(--stamp);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-mono);font-weight:600;font-size:17px;letter-spacing:.05em;
+  box-shadow:0 4px 14px rgba(38,25,14,.28);pointer-events:none;
+}
+.opt{
+  position:relative;background:var(--card);border:1.6px solid var(--line);
+  border-radius:16px;padding:22px 18px 24px;cursor:pointer;text-align:center;
+  font-family:inherit;color:inherit;
+  box-shadow:var(--hard-shadow);
+  transform:rotate(var(--tilt));
+  transition:transform .18s,box-shadow .18s,border-color .18s;
+  display:flex;flex-direction:column;align-items:center;gap:0;
+}
+.options-vs .opt:first-child{--tilt:-1.2deg}
+.options-vs .opt:last-child{--tilt:1.2deg}
+.opt:hover,.opt:focus-visible{
+  transform:rotate(0) translateY(-4px);
+  border-color:var(--caramel);
+  box-shadow:5px 7px 0 rgba(38,25,14,.18);
+}
+.opt:focus-visible{outline:3px solid var(--stamp);outline-offset:3px}
+.opt-tag{
+  font-family:var(--font-mono);font-size:10px;font-weight:600;letter-spacing:.22em;
+  color:var(--ink-faint);text-transform:uppercase;margin-bottom:14px;
+  display:flex;align-items:center;gap:8px;width:100%;justify-content:center;
+}
+.opt-tag::before,.opt-tag::after{content:"";height:1.5px;flex:1;background:var(--line)}
+.opt-emoji{
+  width:86px;height:86px;border-radius:50%;
+  background:var(--paper);border:1.6px dashed var(--line);
+  display:flex;align-items:center;justify-content:center;
+  font-size:44px;line-height:1;margin-bottom:16px;
+}
+.opt-title{font-family:var(--font-display);font-weight:var(--fdw);font-size:clamp(20px,4.6vw,26px);line-height:1.3;margin-bottom:7px;text-wrap:balance}
+.opt-desc{font-size:13.5px;color:var(--ink-soft);line-height:1.5;text-wrap:balance}
+.opt.picked{border-color:var(--stamp);transform:rotate(0) scale(1.03);z-index:2}
+.opt .pick-seal{
+  position:absolute;inset:0;display:none;align-items:center;justify-content:center;
+  background:rgba(244,237,221,.55);border-radius:14px;
+}
+.opt.picked .pick-seal{display:flex}
+.pick-seal b{
+  font-family:var(--font-display);font-weight:var(--fdw);font-size:30px;color:var(--stamp);
+  border:3px solid var(--stamp);border-radius:12px;padding:6px 20px;
+  transform:rotate(-10deg);background:var(--card);
+  box-shadow:0 6px 16px rgba(38,25,14,.2);
+  animation:stamp-slam .32s cubic-bezier(.2,1.4,.4,1) both;
+}
+/* 4지선다(나이·장소) 그리드 */
+.options-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.options-grid .opt{--tilt:0deg;padding:18px 14px 20px}
+.options-grid .opt-emoji{width:64px;height:64px;font-size:32px;margin-bottom:12px}
+.options-grid .opt-title{font-size:clamp(18px,4.2vw,22px)}
+/* MBTI 16유형 선택 그리드 */
+.options-mbti{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.mbti-chip{
+  font-family:var(--font-mono);font-weight:600;font-size:14px;letter-spacing:.08em;
+  background:var(--card);border:1.6px solid var(--line);border-radius:10px;color:var(--ink);
+  padding:15px 0;cursor:pointer;text-align:center;
+  box-shadow:var(--hard-shadow);
+  transition:transform .15s,border-color .15s,background .15s,color .15s;
+}
+.mbti-chip:hover{transform:translateY(-3px);border-color:var(--caramel)}
+.mbti-chip:focus-visible{outline:3px solid var(--stamp);outline-offset:2px}
+.mbti-chip.picked{background:var(--stamp);border-color:var(--stamp);color:#FBF4E4;transform:scale(1.06)}
+.mbti-skip{
+  grid-column:1/-1;margin-top:8px;
+  font-family:var(--font-mono);font-size:12.5px;font-weight:500;letter-spacing:.06em;
+  background:none;border:1.6px dashed var(--line);border-radius:10px;color:var(--ink-soft);
+  padding:13px;cursor:pointer;
+  transition:border-color .15s,color .15s;
+}
+.mbti-skip:hover{border-color:var(--caramel);color:var(--ink)}
+.mbti-skip:focus-visible{outline:3px solid var(--stamp);outline-offset:2px}
+.mbti-skip.picked{border-style:solid;border-color:var(--stamp);color:var(--stamp)}
+.quiz-foot{display:flex;justify-content:center;margin-top:30px}
+.btn-back{
+  font-family:var(--font-mono);font-size:12.5px;font-weight:500;letter-spacing:.08em;
+  background:none;border:none;color:var(--ink-faint);cursor:pointer;
+  padding:8px 14px;border-radius:8px;
+}
+.btn-back:hover{color:var(--ink);background:var(--paper-2)}
+.btn-back:disabled{opacity:0;pointer-events:none}
+
+/* ── 분석중 ─────────────────────────────── */
+.loading{align-items:center;justify-content:center;text-align:center;padding:60px 0;gap:0}
+.brew-cup{font-size:74px;line-height:1;animation:brew-bob 1.2s ease-in-out infinite}
+@keyframes brew-bob{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-10px) rotate(3deg)}}
+.loading h2{font-family:var(--font-display);font-weight:var(--fdw);font-size:30px;margin:26px 0 10px}
+.loading p{font-family:var(--font-mono);font-size:13px;color:var(--ink-soft);min-height:1.6em}
+.brew-dots{display:flex;gap:9px;margin-top:26px}
+.brew-dots i{width:11px;height:11px;border-radius:50%;background:var(--caramel);animation:dot-pulse 1s ease-in-out infinite}
+.brew-dots i:nth-child(2){animation-delay:.18s}
+.brew-dots i:nth-child(3){animation-delay:.36s}
+@keyframes dot-pulse{0%,100%{opacity:.25;transform:scale(.8)}50%{opacity:1;transform:scale(1.1)}}
+
+/* ── 결과 ───────────────────────────────── */
+.result{padding:30px 0 50px}
+.report{
+  background:var(--card);border:1.6px solid var(--line);border-radius:18px;
+  box-shadow:5px 6px 0 rgba(38,25,14,.16);overflow:hidden;
+  animation:screen-in .5s .05s cubic-bezier(.2,.7,.3,1) both;
+}
+.report-head{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:14px 20px;border-bottom:1.5px dashed var(--line);
+  font-family:var(--font-mono);font-size:11px;font-weight:600;
+  letter-spacing:.2em;color:var(--ink-soft);text-transform:uppercase;
+}
+.report-head .match{color:var(--stamp);font-size:13px;letter-spacing:.08em}
+.report-body{padding:30px 24px 28px;text-align:center}
+.r-emoji{
+  width:110px;height:110px;border-radius:50%;margin:0 auto 18px;
+  background:var(--paper);border:1.6px dashed var(--line);
+  display:flex;align-items:center;justify-content:center;font-size:56px;
+}
+.r-nickname{
+  font-family:var(--font-mono);font-size:12px;font-weight:600;letter-spacing:.14em;
+  color:var(--bean);text-transform:none;margin-bottom:12px;
+}
+.r-cat{
+  display:inline-block;font-family:var(--font-mono);font-size:10.5px;font-weight:600;
+  letter-spacing:.18em;color:var(--caramel);border:1.5px solid var(--caramel);
+  border-radius:999px;padding:3px 13px;margin-bottom:12px;text-transform:uppercase;
+}
+.r-name{font-family:var(--font-display);font-weight:var(--fdw);font-size:clamp(32px,7.2vw,46px);line-height:1.2;text-wrap:balance}
+.r-en{font-family:var(--font-mono);font-size:12px;letter-spacing:.18em;color:var(--ink-faint);text-transform:uppercase;margin:6px 0 20px}
+.r-notes{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-bottom:22px}
+.r-notes span{
+  font-size:12.5px;font-weight:600;color:var(--bean);
+  border:1.5px solid var(--bean);border-radius:999px;padding:4px 13px;background:rgba(119,133,95,.08);
+}
+.r-desc{font-size:15px;color:var(--ink-soft);max-width:30em;margin:0 auto;text-wrap:pretty}
+.r-picks{border-top:1.5px dashed var(--line);padding:20px 24px 24px}
+.r-picks-label{font-family:var(--font-mono);font-size:11px;font-weight:600;letter-spacing:.2em;color:var(--ink-faint);text-transform:uppercase;text-align:center;margin-bottom:14px}
+.r-picks-chips{display:flex;flex-wrap:wrap;justify-content:center;gap:9px}
+.r-picks-chips span{
+  font-size:13px;font-weight:600;color:var(--stamp);
+  border:1.6px solid var(--stamp);border-radius:8px;padding:5px 13px;
+  transform:rotate(var(--tilt,0deg));background:var(--card);
+}
+.r-picks-chips span:nth-child(odd){--tilt:-1.4deg}
+.r-picks-chips span:nth-child(even){--tilt:1.2deg}
+.r-picks-chips span::before{content:"✓ ";font-weight:700}
+.buy-zone{padding:0 24px 28px}
+.btn-buy{
+  display:flex;align-items:center;justify-content:center;gap:10px;width:100%;
+  white-space:nowrap;
+  font-family:var(--font-display);font-weight:var(--fdw);font-size:clamp(17px,4.8vw,23px);letter-spacing:.02em;
+  background:var(--stamp);color:#FBF4E4;text-decoration:none;
+  padding:18px 20px;border-radius:12px;border:none;cursor:pointer;
+  box-shadow:4px 4px 0 rgba(38,25,14,.24);
+  transition:transform .15s,box-shadow .15s,background .15s;
+}
+.btn-buy:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 rgba(38,25,14,.24);background:var(--stamp-deep)}
+.btn-buy:active{transform:translate(1px,1px);box-shadow:2px 2px 0 rgba(38,25,14,.24)}
+.buy-note{font-family:var(--font-mono);font-size:11px;color:var(--ink-faint);text-align:center;margin-top:10px;letter-spacing:.06em}
+
+.subrec{margin-top:26px}
+.subrec-label{font-family:var(--font-mono);font-size:11px;font-weight:600;letter-spacing:.2em;color:var(--ink-faint);text-transform:uppercase;margin-bottom:12px}
+.subrec-list{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.stub{
+  display:flex;flex-direction:column;gap:2px;text-decoration:none;color:inherit;
+  background:var(--card);border:1.5px solid var(--line);border-radius:12px;
+  padding:14px 16px;box-shadow:var(--hard-shadow);
+  transition:transform .15s,border-color .15s;
+}
+.stub:hover{transform:translateY(-3px);border-color:var(--caramel)}
+.stub .s-rank{font-family:var(--font-mono);font-size:10px;font-weight:600;letter-spacing:.18em;color:var(--caramel)}
+.stub .s-name{font-family:var(--font-display);font-weight:var(--fdw);font-size:18px;line-height:1.3}
+.stub .s-note{font-size:12px;color:var(--ink-soft)}
+.stub .s-go{font-family:var(--font-mono);font-size:11px;color:var(--stamp);font-weight:600;margin-top:6px}
+
+.result-actions{display:flex;gap:12px;margin-top:26px}
+.btn-ghost{
+  flex:1;font-family:var(--font-mono);font-size:13px;font-weight:600;letter-spacing:.06em;
+  background:var(--card);border:1.6px solid var(--ink);border-radius:10px;color:var(--ink);
+  padding:13px 10px;cursor:pointer;box-shadow:var(--hard-shadow);
+  transition:transform .15s,box-shadow .15s;
+}
+.btn-ghost:hover{transform:translate(-1px,-1px);box-shadow:4px 4px 0 rgba(38,25,14,.18)}
+.btn-ghost:active{transform:translate(1px,1px);box-shadow:1px 1px 0 rgba(38,25,14,.18)}
+
+/* ── 공통 ───────────────────────────────── */
+footer{
+  border-top:1.5px dashed var(--line);margin-top:auto;
+  padding:16px 2px 22px;display:flex;justify-content:space-between;gap:10px;
+  font-family:var(--font-mono);font-size:10.5px;letter-spacing:.12em;
+  color:var(--ink-faint);text-transform:uppercase;
+}
+footer a{color:var(--ink-soft);text-decoration:none}
+footer a:hover{color:var(--stamp)}
+.toast{
+  position:fixed;left:50%;bottom:34px;transform:translate(-50%,20px);
+  background:var(--ink);color:var(--paper);font-size:13.5px;font-weight:600;
+  padding:12px 22px;border-radius:10px;opacity:0;pointer-events:none;
+  transition:opacity .25s,transform .25s;z-index:50;box-shadow:0 8px 24px rgba(38,25,14,.3);
+}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+
+@media (max-width:620px){
+  .options-vs{grid-template-columns:1fr;gap:26px}
+  .vs-badge{width:50px;height:50px;font-size:15px}
+  .options-vs .opt{flex-direction:row;text-align:left;padding:16px 16px;gap:16px}
+  .options-vs .opt-emoji{width:66px;height:66px;font-size:34px;margin:0;flex:none}
+  .options-vs .opt-tag{display:none}
+  .options-vs .opt-body{flex:1}
+  .options-vs .opt-title{margin-bottom:4px}
+  .options-mbti{gap:8px}
+  .mbti-chip{font-size:12.5px;padding:13px 0;letter-spacing:.05em}
+  .subrec-list{grid-template-columns:1fr}
+  .meta-row{gap:16px}
+  .punch{width:18px;height:18px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="topbar">
+    <span id="brand-name">BEANS COFFEE ROASTERS</span>
+    <a id="brand-link" href="#" target="_blank" rel="noopener">SHOP →</a>
+  </header>
+
+  <!-- 인트로 -->
+  <section class="screen intro on" id="screen-intro">
+    <p class="eyebrow">Coffee Taste Worldcup</p>
+    <h1>취향으로 찾는<br>나의 <em>인생 커피</em></h1>
+    <p class="lede">MBTI·나이·장소·커피 습관까지 —<br><strong>10번의 선택</strong>이면 충분해요. 이상형 월드컵처럼 고르다 보면, 원두·드립백·드립에센스 중 딱 맞는 커피가 나타납니다.</p>
+    <div class="meta-row">
+      <span><b>10</b>번 선택</span>
+      <span><b>3</b>개 라인</span>
+      <span><b>7</b>가지 제품</span>
+      <span><b>1</b>분 소요</span>
+    </div>
+    <button class="btn-start" id="btn-start" type="button">테스트 시작하기 <span class="arr">→→</span></button>
+    <div class="lineup">
+      <p class="lineup-label">Today's Lineup — Beans · Drip Bag · Essence</p>
+      <div class="lineup-tags" id="lineup-tags"></div>
+    </div>
+  </section>
+
+  <!-- 퀴즈 -->
+  <section class="screen quiz" id="screen-quiz" aria-live="polite">
+    <div class="quiz-head">
+      <span class="q-counter" id="q-counter">Q 01/10</span>
+      <span class="q-cat" id="q-cat">MBTI</span>
+    </div>
+    <div class="punchcard" id="punchcard" aria-hidden="true"></div>
+    <h2 class="q-title" id="q-title"></h2>
+    <p class="q-hint" id="q-hint"></p>
+    <div id="q-options"></div>
+    <div class="quiz-foot">
+      <button class="btn-back" id="btn-back" type="button">← 이전 질문으로</button>
+    </div>
+  </section>
+
+  <!-- 분석중 -->
+  <section class="screen loading" id="screen-loading">
+    <div class="brew-cup">☕</div>
+    <h2>당신의 커피를 내리는 중</h2>
+    <p id="loading-text">취향 데이터 분석 중...</p>
+    <div class="brew-dots"><i></i><i></i><i></i></div>
+  </section>
+
+  <!-- 결과 -->
+  <section class="screen result" id="screen-result">
+    <div class="report">
+      <div class="report-head">
+        <span>Match Report · No.<span id="r-no">0731</span></span>
+        <span class="match"><span id="r-pct">0</span>% MATCH</span>
+      </div>
+      <div class="report-body">
+        <div class="r-emoji" id="r-emoji">☕</div>
+        <p class="r-nickname" id="r-nickname"></p>
+        <div><span class="r-cat" id="r-cat"></span></div>
+        <h2 class="r-name" id="r-name"></h2>
+        <p class="r-en" id="r-en"></p>
+        <div class="r-notes" id="r-notes"></div>
+        <p class="r-desc" id="r-desc"></p>
+      </div>
+      <div class="r-picks" id="r-picks">
+        <p class="r-picks-label">당신의 선택</p>
+        <div class="r-picks-chips" id="r-picks-chips"></div>
+      </div>
+      <div class="buy-zone">
+        <a class="btn-buy" id="btn-buy" href="#" target="_blank" rel="noopener">이 커피 구매하러 가기 →</a>
+        <p class="buy-note">클릭하면 상품 페이지로 이동해요 · 바로 주문 가능</p>
+      </div>
+    </div>
+    <div class="subrec">
+      <p class="subrec-label">이런 제품도 잘 맞아요</p>
+      <div class="subrec-list" id="subrec-list"></div>
+    </div>
+    <div class="result-actions">
+      <button class="btn-ghost" id="btn-retry" type="button">↺ 다시 하기</button>
+      <button class="btn-ghost" id="btn-share" type="button">결과 공유하기</button>
+    </div>
+  </section>
+
+  <footer>
+    <span>Find Your Coffee · Since 2026</span>
+    <a id="footer-link" href="#" target="_blank" rel="noopener">전체 제품 보기 →</a>
+  </footer>
+</div>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+/* ═══════════════════════════════════════════════════════════════
+   ★ 여기만 수정하면 됩니다 — 쇼핑몰 기본 설정
+   ═══════════════════════════════════════════════════════════════ */
+const CONFIG = {
+  shopName: "BEANS COFFEE ROASTERS",          // ← 쇼핑몰 이름 (상단에 표시)
+  shopUrl:  "https://YOUR-SHOP.cafe24.com",   // ← 카페24 쇼핑몰 주소
+};
+
+/* ═══════════════════════════════════════════════════════════════
+   ★ 제품 정보 — 원두커피 / 드립백 / 드립에센스, 총 7종
+   name / notes / desc / url 을 내 상품에 맞게 수정하세요.
+   url: 카페24 상품 상세페이지 주소를 그대로 붙여넣기
+        (예: https://내쇼핑몰.cafe24.com/product/detail.html?product_no=123)
+   ═══════════════════════════════════════════════════════════════ */
+const PRODUCTS = {
+  beans200: {
+    cat: "원두커피",
+    name: "원두커피 200g",
+    en: "Whole Bean Coffee 200g",
+    nickname: "향부터 즐기는 홈카페 입문자",
+    emoji: "🫘",
+    notes: ["그라인더·드립기구용", "갓 볶은 신선함", "2주 소진 최적"],
+    desc: "그라인더와 드립 기구가 있다면, 집이 곧 카페가 됩니다. 원두를 가는 순간 퍼지는 향은 홀빈만의 특권. 200g은 가장 신선할 때 다 마실 수 있는 홈카페 입문 최적 용량입니다.",
+    url: "https://YOUR-SHOP.cafe24.com/product/detail.html?product_no=201",
+  },
+  beans500: {
+    cat: "원두커피",
+    name: "원두커피 500g",
+    en: "Whole Bean Coffee 500g",
+    nickname: "매일 내리는 홈바리스타",
+    emoji: "☕",
+    notes: ["홈카페 데일리", "나만의 레시피", "신선함·가성비 밸런스"],
+    desc: "매일 한두 잔, 물줄기와 뜸 시간까지 바리스타처럼 내 레시피로 즐기는 분께. 꾸준히 마시는 홈카페족에게 신선함과 가성비의 균형이 가장 좋은 500g을 추천해요.",
+    url: "https://YOUR-SHOP.cafe24.com/product/detail.html?product_no=202",
+  },
+  beans1kg: {
+    cat: "원두커피",
+    name: "원두커피 1kg+",
+    en: "Whole Bean Coffee 1kg+",
+    nickname: "스케일이 다른 커피 대장",
+    emoji: "📦",
+    notes: ["대용량", "업소·헤비유저", "g당 최고 가성비"],
+    desc: "하루에도 여러 잔, 온 가족·온 팀이 함께라면 1kg 이상 대용량이 답입니다. 카페·매장에서도 쓰는 업소용 용량으로, g당 가격이 가장 합리적이에요.",
+    url: "https://YOUR-SHOP.cafe24.com/product/detail.html?product_no=203",
+  },
+  dripbag12: {
+    cat: "드립백커피",
+    name: "드립백커피 12g",
+    en: "Drip Bag Coffee 12g",
+    nickname: "어디서든 카페를 여는 커피 유목민",
+    emoji: "🎒",
+    notes: ["기구 필요 없음", "물만 부으면 끝", "휴대 간편"],
+    desc: "기구 없이 컵에 걸고 뜨거운 물만 부으면, 언제 어디서든 카페 한 잔이 완성됩니다. 사무실 서랍, 여행 가방, 캠핑 백팩 어디든 들어가는 12g 드립백입니다.",
+    url: "https://YOUR-SHOP.cafe24.com/product/detail.html?product_no=204",
+  },
+  dripbag20: {
+    cat: "드립백커피",
+    name: "드립백커피 20g 대용량",
+    en: "Drip Bag Coffee 20g",
+    nickname: "타협 없는 진한 맛 원칙주의자",
+    emoji: "🔥",
+    notes: ["전문점과 같은 원두량", "진한 풍미", "대용량 드립백"],
+    desc: "전문점 핸드드립과 같은 20g 원두량을 그대로 담았습니다. 드립백인데도 진하고 풍부해서, '드립백은 연하다'에 아쉬웠던 분을 위한 대용량 드립백이에요.",
+    url: "https://YOUR-SHOP.cafe24.com/product/detail.html?product_no=205",
+  },
+  essence500: {
+    cat: "드립에센스",
+    name: "드립에센스 500ml",
+    en: "Drip Essence 500ml",
+    nickname: "10초 만에 완성하는 만능 홈카페러",
+    emoji: "⏱️",
+    notes: ["10초 완성", "핫·아이스·라떼 만능", "핸드드립 농축 원액"],
+    desc: "핸드드립 커피를 그대로 농축한 원액입니다. 더치(콜드브루)와 달리 따뜻하게 마셔도 맛있고, 물이나 우유에 부으면 10초 만에 완성 — 라떼까지 홈카페 메뉴가 됩니다.",
+    url: "https://YOUR-SHOP.cafe24.com/product/detail.html?product_no=206",
+  },
+  essence1L: {
+    cat: "드립에센스",
+    name: "드립에센스 1L+",
+    en: "Drip Essence 1L+",
+    nickname: "머신 없이 카페를 여는 사장님",
+    emoji: "🏪",
+    notes: ["카페 납품용", "머신·그라인더 없이 판매", "10초 제조"],
+    desc: "에스프레소 머신도 그라인더도 없이, 물·우유만으로 커피 메뉴를 판매할 수 있는 매장용 대용량 원액입니다. 핫·아이스·라떼 모두 10초면 제공 — 소규모 카페, 베이커리, 브런치집 납품에 딱입니다.",
+    url: "https://YOUR-SHOP.cafe24.com/product/detail.html?product_no=207",
+  },
+};
+
+/* ═══════════════════════════════════════════════════════════════
+   MBTI 글자별 가중치 — 각 글자가 어울리는 제품에 1점씩
+   ═══════════════════════════════════════════════════════════════ */
+const MBTI_LETTER_POINTS = {
+  E: { dripbag12: 1, essence500: 1 },   // 활동적 — 어디서든, 손님 접대까지
+  I: { beans200: 1, beans500: 1 },      // 나만의 홈카페 몰입
+  S: { beans500: 1, dripbag12: 1 },     // 검증된 익숙한 방식
+  N: { essence500: 1, dripbag20: 1 },   // 새로운 방식에 호기심
+  T: { essence500: 1, beans1kg: 1 },    // 효율·가성비 중시
+  F: { beans200: 1, dripbag12: 1 },     // 향과 분위기의 감성
+  J: { beans500: 1, dripbag20: 1 },     // 루틴·계획적 소비
+  P: { dripbag12: 1, essence500: 1 },   // 즉흥, 간편함이 최고
+};
+const MBTI_TYPES = ["ISTJ","ISFJ","INFJ","INTJ","ISTP","ISFP","INFP","INTP","ESTP","ESFP","ENFP","ENTP","ESTJ","ESFJ","ENFJ","ENTJ"];
+function mbtiOption(type) {
+  const points = {};
+  for (const letter of type) {
+    for (const [k, v] of Object.entries(MBTI_LETTER_POINTS[letter] || {})) points[k] = (points[k] || 0) + v;
+  }
+  return { title: type, points, reason: `${type} 성향 반영` };
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   질문 데이터 — points의 숫자만큼 해당 제품에 점수가 쌓입니다
+   ═══════════════════════════════════════════════════════════════ */
+const QUESTIONS = [
+  {
+    cat: "MBTI", q: "먼저, 당신의 MBTI는?", layout: "mbti",
+    hint: "성향에 맞는 커피 스타일을 찾아드려요",
+    options: [
+      ...MBTI_TYPES.map(mbtiOption),
+      { title: "잘 몰라요", skip: true, points: {}, reason: "" },
+    ],
+  },
+  {
+    cat: "나이", q: "당신의 연령대는?", layout: "grid",
+    options: [
+      { emoji: "🌱", title: "10~20대", desc: "간편하고 힙하게", points: { dripbag12: 1, essence500: 1 }, reason: "간편함이 먼저인 10~20대" },
+      { emoji: "🔥", title: "30대", desc: "바빠도 맛은 포기 못 함", points: { beans200: 1, essence500: 1 }, reason: "바쁜 일상 속 홈카페 30대" },
+      { emoji: "🌳", title: "40대", desc: "본격 홈카페의 맛", points: { beans500: 1, dripbag20: 1 }, reason: "본격 홈카페 40대" },
+      { emoji: "🏔️", title: "50대 이상", desc: "넉넉하고 진하게", points: { beans1kg: 1, dripbag20: 1 }, reason: "넉넉하고 진한 클래식" },
+    ],
+  },
+  {
+    cat: "장소", q: "이 커피, 주로 어디서 마시나요?", layout: "grid",
+    options: [
+      { emoji: "🏠", title: "집 · 홈카페", desc: "나와 가족의 일상 한 잔", points: { beans200: 2, beans500: 2, essence500: 1 }, reason: "집에서 즐기는 홈카페" },
+      { emoji: "🏢", title: "사무실 · 스터디", desc: "책상 위 각성 연료", points: { dripbag12: 3, dripbag20: 1, essence500: 1 }, reason: "사무실 책상 위 한 잔" },
+      { emoji: "☕", title: "카페 · 매장 납품", desc: "손님에게 낼 커피를 찾아요", points: { essence1L: 8, beans1kg: 4, dripbag20: 1 }, reason: "매장 운영·납품용" },
+      { emoji: "🏕️", title: "야외 · 여행", desc: "밖에서도 커피는 포기 못 해", points: { dripbag12: 3, dripbag20: 2 }, reason: "야외에서도 커피와 함께" },
+    ],
+  },
+  {
+    cat: "기구", q: "커피 기구, 갖고 계세요?",
+    options: [
+      { emoji: "⚙️", title: "그라인더·드립세트 있어요", desc: "장비 세팅 완료, 갈아서 내립니다", points: { beans200: 2, beans500: 2, beans1kg: 1 }, reason: "홈카페 장비 보유" },
+      { emoji: "🥤", title: "컵과 물이면 충분해요", desc: "장비는 미니멀하게", points: { dripbag12: 2, essence500: 2, dripbag20: 1 }, reason: "기구 없이 간편하게" },
+    ],
+  },
+  {
+    cat: "시간", q: "커피 한 잔에 쓸 시간은?",
+    options: [
+      { emoji: "⏳", title: "내리는 과정이 곧 힐링", desc: "갈고, 뜸 들이고, 천천히", points: { beans200: 2, beans500: 1 }, reason: "핸드드립 리추얼파" },
+      { emoji: "⚡", title: "바빠요, 10초컷이요", desc: "맛은 절대 포기 못 함", points: { essence500: 2, dripbag12: 1, essence1L: 1 }, reason: "10초 완성파" },
+    ],
+  },
+  {
+    cat: "습관", q: "하루 커피 소비량은?",
+    options: [
+      { emoji: "🍵", title: "하루 한두 잔, 소중하게", desc: "한 잔의 퀄리티가 중요", points: { beans200: 1, dripbag12: 2, essence500: 1 }, reason: "하루 한두 잔 음미파" },
+      { emoji: "♾️", title: "종일 여러 잔, 다 같이", desc: "혼자 아니고 여럿이 마셔요", points: { beans1kg: 2, beans500: 1, essence1L: 2, dripbag20: 1 }, reason: "커피 헤비유저" },
+    ],
+  },
+  {
+    cat: "취향", q: "커피의 농도는?",
+    options: [
+      { emoji: "🌑", title: "진하게, 꽉 차게", desc: "연한 커피는 서운해요", points: { dripbag20: 2, essence500: 1, beans1kg: 1 }, reason: "진한 커피파" },
+      { emoji: "☁️", title: "부드럽고 편안하게", desc: "은은한 게 좋아요", points: { dripbag12: 1, beans200: 1, beans500: 1 }, reason: "부드러운 커피파" },
+    ],
+  },
+  {
+    cat: "메뉴", q: "당신의 최애 메뉴는?",
+    options: [
+      { emoji: "⚫", title: "블랙 — 커피 본연의 맛", desc: "아무것도 섞지 않아요", points: { beans200: 1, beans500: 1, dripbag20: 1 }, reason: "블랙커피 순수파" },
+      { emoji: "🥛", title: "라떼 — 우유를 만나야 완성", desc: "바닐라라떼도 환영", points: { essence500: 2, essence1L: 1 }, reason: "라떼 러버" },
+    ],
+  },
+  {
+    cat: "쇼핑", q: "커피 쇼핑 스타일은?",
+    options: [
+      { emoji: "📦", title: "넉넉하게 쟁여두기", desc: "떨어지면 불안해요", points: { beans1kg: 2, dripbag20: 2, essence1L: 1, beans500: 1 }, reason: "든든한 대용량파" },
+      { emoji: "🌿", title: "조금씩 자주, 신선하게", desc: "그때그때 새 걸로", points: { beans200: 2, dripbag12: 1, essence500: 1 }, reason: "신선한 소용량파" },
+    ],
+  },
+  {
+    cat: "온도", q: "지금 당기는 온도는?",
+    options: [
+      { emoji: "🧊", title: "얼음 가득 아이스", desc: "한겨울에도 얼죽아", points: { essence500: 2, dripbag20: 1 }, reason: "사계절 얼죽아" },
+      { emoji: "♨️", title: "김이 모락모락 따뜻하게", desc: "온기가 곧 힐링", points: { beans500: 1, beans200: 1, dripbag12: 1 }, reason: "따뜻한 한 잔파" },
+    ],
+  },
+];
+
+/* ═══════════════════════════════════════════════════════════════
+   이하 앱 로직 — 수정하지 않아도 됩니다
+   ═══════════════════════════════════════════════════════════════ */
+const $ = (id) => document.getElementById(id);
+const screens = { intro: $("screen-intro"), quiz: $("screen-quiz"), loading: $("screen-loading"), result: $("screen-result") };
+let answers = []; // { qIndex, option }
+
+function showScreen(name) {
+  Object.values(screens).forEach((s) => s.classList.remove("on"));
+  const sc = screens[name];
+  sc.classList.remove("on");
+  void sc.offsetWidth; // 재진입 시 애니메이션 리셋
+  sc.classList.add("on");
+  window.scrollTo({ top: 0, behavior: "instant" in window ? "instant" : "auto" });
+}
+
+/* ── 인트로 ── */
+function initIntro() {
+  $("brand-name").textContent = CONFIG.shopName;
+  $("brand-link").href = CONFIG.shopUrl;
+  $("footer-link").href = CONFIG.shopUrl;
+  $("lineup-tags").innerHTML = Object.values(PRODUCTS)
+    .map((c) => `<span>${c.emoji} ${c.name}</span>`).join("");
+}
+
+/* ── 퀴즈 렌더 ── */
+function renderQuestion() {
+  const i = answers.length;
+  const q = QUESTIONS[i];
+  $("q-counter").textContent = `Q ${String(i + 1).padStart(2, "0")}/${QUESTIONS.length}`;
+  $("q-cat").textContent = q.cat;
+  $("q-title").textContent = q.q;
+  $("q-hint").textContent = q.hint || "";
+  $("q-hint").style.display = q.hint ? "" : "none";
+  $("punchcard").innerHTML = QUESTIONS.map((_, k) =>
+    `<span class="punch${k < i ? " filled" : ""}${k === i - 1 ? " stamp-in" : ""}"></span>`
+  ).join("");
+
+  const box = $("q-options");
+  if (q.layout === "mbti") {
+    box.className = "options-mbti";
+    box.innerHTML = q.options.map((o, k) => o.skip
+      ? `<button class="mbti-skip" type="button" data-k="${k}">잘 몰라요 · 건너뛰고 계속 →</button>`
+      : `<button class="mbti-chip" type="button" data-k="${k}">${o.title}</button>`
+    ).join("");
+  } else if (q.layout === "grid") {
+    box.className = "options-grid";
+    box.innerHTML = q.options.map((o, k) => `
+      <button class="opt" type="button" data-k="${k}">
+        <span class="opt-emoji">${o.emoji}</span>
+        <span class="opt-body">
+          <span class="opt-title" style="display:block">${o.title}</span>
+          <span class="opt-desc" style="display:block">${o.desc}</span>
+        </span>
+        <span class="pick-seal"><b>PICK!</b></span>
+      </button>
+    `).join("");
+  } else {
+    box.className = "options-vs";
+    box.innerHTML = q.options.map((o, k) => `
+      <button class="opt" type="button" data-k="${k}">
+        <span class="opt-tag">Choice ${k === 0 ? "A" : "B"}</span>
+        <span class="opt-emoji">${o.emoji}</span>
+        <span class="opt-body">
+          <span class="opt-title" style="display:block">${o.title}</span>
+          <span class="opt-desc" style="display:block">${o.desc}</span>
+        </span>
+        <span class="pick-seal"><b>PICK!</b></span>
+      </button>
+    `).join("") + `<span class="vs-badge" aria-hidden="true">VS</span>`;
+  }
+
+  box.querySelectorAll("[data-k]").forEach((btn) => {
+    btn.addEventListener("click", () => pick(q, q.options[+btn.dataset.k], btn));
+  });
+  $("btn-back").disabled = i === 0;
+}
+
+let picking = false;
+function pick(q, option, btn) {
+  if (picking) return;
+  picking = true;
+  btn.classList.add("picked");
+  answers.push({ qIndex: QUESTIONS.indexOf(q), option });
+  setTimeout(() => {
+    picking = false;
+    if (answers.length >= QUESTIONS.length) startLoading();
+    else renderQuestion();
+  }, 430);
+}
+
+function goBack() {
+  if (!answers.length || picking) return;
+  answers.pop();
+  renderQuestion();
+}
+
+/* ── 분석 연출 ── */
+const LOADING_LINES = ["취향 데이터 분석 중...", "원두·드립백·에센스 대조 중...", "딱 맞는 용량 계산 중...", "당신의 커피를 찾았어요!"];
+function startLoading() {
+  showScreen("loading");
+  let step = 0;
+  $("loading-text").textContent = LOADING_LINES[0];
+  const timer = setInterval(() => {
+    step += 1;
+    if (step < LOADING_LINES.length) $("loading-text").textContent = LOADING_LINES[step];
+  }, 620);
+  setTimeout(() => { clearInterval(timer); showResult(computeResult()); }, 2500);
+}
+
+/* ── 결과 계산 ── */
+function computeResult() {
+  const scores = {};
+  Object.keys(PRODUCTS).forEach((k) => (scores[k] = 0));
+  answers.forEach(({ option }) => {
+    Object.entries(option.points).forEach(([k, v]) => { scores[k] += v; });
+  });
+  const ranked = Object.keys(PRODUCTS).sort((a, b) => scores[b] - scores[a]);
+  const [top, second, third] = ranked;
+  const pct = Math.min(98, Math.max(87, 87 + Math.round((scores[top] - scores[second]) * 2.5)));
+  const reasons = [];
+  answers
+    .filter(({ option }) => option.points[top])
+    .sort((a, b) => (b.option.points[top] || 0) - (a.option.points[top] || 0))
+    .slice(0, 3)
+    .forEach(({ option }) => { if (option.reason) reasons.push(option.reason); });
+  return { key: top, subs: [second, third], pct, reasons, shared: false };
+}
+
+/* ── 결과 렌더 ── */
+function showResult({ key, subs, pct, reasons, shared }) {
+  const c = PRODUCTS[key];
+  $("r-no").textContent = String(((hashCode(key) % 9000) + 1000));
+  $("r-emoji").textContent = c.emoji;
+  $("r-nickname").textContent = `당신은 「${c.nickname}」`;
+  $("r-cat").textContent = `${c.cat} 라인`;
+  $("r-name").textContent = c.name;
+  $("r-en").textContent = c.en;
+  $("r-notes").innerHTML = c.notes.map((n) => `<span>${n}</span>`).join("");
+  $("r-desc").textContent = c.desc;
+  $("btn-buy").href = c.url;
+
+  const picksBox = $("r-picks");
+  if (shared || !reasons.length) {
+    picksBox.style.display = "none";
+  } else {
+    picksBox.style.display = "";
+    $("r-picks-chips").innerHTML = reasons.map((r) => `<span>${r}</span>`).join("");
+  }
+
+  $("subrec-list").innerHTML = subs.map((k, idx) => {
+    const s = PRODUCTS[k];
+    return `<a class="stub" href="${s.url}" target="_blank" rel="noopener">
+      <span class="s-rank">${idx ? "3rd" : "2nd"} Pick ${idx ? "③" : "②"}</span>
+      <span class="s-name">${s.emoji} ${s.name}</span>
+      <span class="s-note">${s.notes.join(" · ")}</span>
+      <span class="s-go">보러가기 →</span>
+    </a>`;
+  }).join("");
+
+  $("btn-retry").textContent = shared ? "☕ 나도 테스트 하기" : "↺ 다시 하기";
+  showScreen("result");
+  animatePct(pct);
+  currentResultKey = key;
+}
+
+function hashCode(str) {
+  let h = 0;
+  for (let i = 0; i < str.length; i++) h = (h * 31 + str.charCodeAt(i)) >>> 0;
+  return h;
+}
+
+function animatePct(target) {
+  const el = $("r-pct");
+  const dur = 900, t0 = performance.now();
+  function tick(t) {
+    const p = Math.min(1, (t - t0) / dur);
+    el.textContent = Math.round(target * (1 - Math.pow(1 - p, 3)));
+    if (p < 1) requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}
+
+/* ── 공유 ── */
+let currentResultKey = null;
+function shareResult() {
+  if (!currentResultKey) return;
+  const url = `${location.origin}${location.pathname}?result=${currentResultKey}`;
+  const c = PRODUCTS[currentResultKey];
+  const text = `☕ 나의 인생 커피는 「${c.name}」 — ${c.nickname}! 너도 찾아봐`;
+  if (navigator.share) {
+    navigator.share({ title: "커피 취향 월드컵", text, url }).catch(() => {});
+  } else {
+    copyText(`${text}\n${url}`);
+  }
+}
+function copyText(t) {
+  const done = () => toast("링크가 복사되었어요! 친구에게 공유해보세요 ☕");
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(t).then(done).catch(() => fallbackCopy(t, done));
+  } else fallbackCopy(t, done);
+}
+function fallbackCopy(t, done) {
+  const ta = document.createElement("textarea");
+  ta.value = t; ta.style.position = "fixed"; ta.style.opacity = "0";
+  document.body.appendChild(ta); ta.select();
+  try { document.execCommand("copy"); done(); } catch (e) { toast("주소창의 링크를 직접 복사해주세요"); }
+  document.body.removeChild(ta);
+}
+let toastTimer;
+function toast(msg) {
+  const el = $("toast");
+  el.textContent = msg;
+  el.classList.add("show");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => el.classList.remove("show"), 2600);
+}
+
+/* ── 시작/리셋 ── */
+function startQuiz() {
+  answers = [];
+  currentResultKey = null;
+  renderQuestion();
+  showScreen("quiz");
+}
+
+$("btn-start").addEventListener("click", startQuiz);
+$("btn-retry").addEventListener("click", startQuiz);
+$("btn-back").addEventListener("click", goBack);
+$("btn-share").addEventListener("click", shareResult);
+
+initIntro();
+
+/* 디스플레이 폰트: 화면에 쓰일 문구의 글리프를 실제로 받아온 뒤에만 적용.
+   한글 웹폰트는 서브셋 분할 로딩이라 미리 load()로 당겨오고,
+   load()가 돌려준 FontFace 개수로 성공 여부를 판정한다
+   (check()는 해당 @font-face가 없을 때도 true를 반환하므로 쓰지 않음).
+   CDN 실패 시에는 df 클래스가 안 붙어 굵은 본문체 폴백이 유지된다. */
+if (document.fonts && document.fonts.load) {
+  const displayText = [
+    "취향으로 찾는 나의 인생 커피", "테스트 시작하기", "PICK!",
+    "당신의 커피를 내리는 중", "이 커피 구매하러 가기", "다시 하기", "나도 테스트 하기",
+    ...QUESTIONS.flatMap((q) => [q.q, ...q.options.map((o) => o.title)]),
+    ...Object.values(PRODUCTS).map((c) => c.name),
+  ].join("");
+  const tryDisplayFont = () => {
+    if (document.documentElement.classList.contains("df")) return;
+    document.fonts.load('16px "Do Hyeon"', displayText)
+      .then((faces) => { if (faces.length) document.documentElement.classList.add("df"); })
+      .catch(() => {});
+  };
+  tryDisplayFont();
+  [800, 2000, 4500].forEach((t) => setTimeout(tryDisplayFont, t));
+}
+
+/* 공유 링크(?result=키)로 들어온 경우 결과 바로 보여주기 */
+const sharedKey = new URLSearchParams(location.search).get("result");
+if (sharedKey && PRODUCTS[sharedKey]) {
+  const others = Object.keys(PRODUCTS).filter((k) => k !== sharedKey);
+  showResult({ key: sharedKey, subs: others.slice(0, 2), pct: 93, reasons: [], shared: true });
+}
+</script>
+</body>
+</html>
